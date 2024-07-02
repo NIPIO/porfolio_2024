@@ -1,16 +1,22 @@
 ---
 import GitHub from "./icons/GitHub.astro"
-import NextJS from "./icons/NextJS.astro"
+import Quasar from "./icons/Quasar.astro"
+import Vue from "./icons/Vue.astro"
 import Tailwind from "./icons/Tailwind.astro"
 import Link from "./icons/Link.astro"
 import LinkButton from "./LinkButton.astro"
 
 const TAGS = {
-  NEXT: {
-    name: "Next.js",
-    class: "bg-black text-white",
-    icon: NextJS,
+  QUASAR: {
+    name: "Quasar",
+    class: "bg-[#7a95ff]  text-white",
+    icon: Quasar,
   },
+    VUE: {
+      name: "Vue",
+      class: "bg-[#42b883] text-white",
+      icon: Vue,
+    },
   TAILWIND: {
     name: "Tailwind CSS",
     class: "bg-[#003159] text-white",
@@ -19,21 +25,22 @@ const TAGS = {
 }
 const PROJECTS = [
   {
-    title: "SVGL - A beautiful library with SVG logos",
+    title: "ChatQuasar - Chat en vivo!",
     description:
-      "Biblioteca de logos SVG de las marcas más populares. +10k visitas al mes. +2K svgs descargados. Creado desde cero con Next.js, React y Tailwind CSS.",
-    link: "https://svgl.vercel.app/",
-    github: "https://github.com/pheralb/svgl",
-    image: "/projects/svgl.webp",
-    tags: [TAGS.NEXT, TAGS.TAILWIND],
+      "Un chat desarrollado con lo último de Vue (Quasar). Multiples usuarios pueden conversar en el mismo chat. Logueo y autenticación con Gmail y Firebase. Creado desde cero con Quasar.",
+    link: "https://chatquasar-36f6f.web.app/",
+    github: "https://github.com/NIPIO/Chat-Quasar-Firebase",
+    image: "/projects/Chat.PNG",
+    tags: [TAGS.QUASAR, TAGS.VUE, TAGS.TAILWIND],
   },
   {
-    title: "AdventJS - Retos de programación con JavaScript y TypeScript",
+    title: "App de Clima",
     description:
-      "Plataforma gratuita con retos de programación. Más de 1 millón de visitas en un mes. +50K retos completados. Creada desde cero con Next.js, React y Tailwind CSS.",
-    link: "https://adventjs.dev",
-    image: "/projects/adventjs.webp",
-    tags: [TAGS.NEXT, TAGS.TAILWIND],
+      "Aplicación conectada a dos Apis (una de ciudades, otra de clima) para consultar el clima actual, diario y semanal0. Desarrollada con historial de búsqueda. Creada desde cero con Vue y Tailwind CSS.",
+    link: "https://weather-app-with-vue-and-tailwind.vercel.app/",
+    github: "https://github.com/NIPIO/Weather-App-With-Vue-And-Tailwind",
+    image: "/projects/Weather.png",
+    tags: [TAGS.TAILWIND, TAGS.VUE],
   },
 ]
 ---
@@ -88,6 +95,3 @@ const PROJECTS = [
     ))
   }
 </div>
-
-
-
