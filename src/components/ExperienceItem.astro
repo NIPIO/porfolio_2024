@@ -4,11 +4,11 @@ import SocialPill from "@/components/SocialPill.astro"
 
 interface Props {
   title: string
-  company: string
+  company?: string
   description: string
   link?: string
   date: string
-  usos?: array
+  usos?: Array<any>
 }
 
 const { title, company, description, link, date, usos } = Astro.props
@@ -31,7 +31,7 @@ const { title, company, description, link, date, usos } = Astro.props
   <div class="relative flex flex-col gap-2 pb-4 text-gray-600 dark:text-gray-300 md:col-span-3">
     {description}
 
-    <div>{usos?.map(i  => <SocialPill > {i} </SocialPill>)}</div>
+    <div>{usos?.map((i)  => <SocialPill > {i} </SocialPill>)}</div>
     {
       link && (
         <LinkInline href={link}>
