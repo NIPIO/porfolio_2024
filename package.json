@@ -17,6 +17,7 @@
     "astro": "4.4.5",
     "astro-robots-txt": "1.0.0",
     "firebase": "^10.12.2",
+    "fireworks-js": "^2.10.8",
     "tailwindcss": "3.4.1",
     "typescript": "5.3.3"
   }

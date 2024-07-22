@@ -2,6 +2,7 @@
 const personalImageAlt = "Nico Piovano"
 import Badge from "@/components/Badge.astro"
 import LinkedInIcon from "@/components/icons/LinkedIn.astro"
+import CvIcon from "@/components/icons/Cv.astro"
 import MailIcon from "@/components/icons/Mail.astro"
 import SocialPill from "@/components/SocialPill.astro"
 ---
@@ -42,6 +43,10 @@ import SocialPill from "@/components/SocialPill.astro"
     <SocialPill href="https://linkedin.com/in/nmpiovano">
       <LinkedInIcon class="size-4" />
       LinkedIn
+    </SocialPill>
+    <SocialPill href="/src/files/CV_NICO_PIOVANO_2024.pdf" download="CV_NICO_PIOVANO_2024">
+      <CvIcon class="size-4" />
+      CV 2024
     </SocialPill>
   </nav>
 </div>
