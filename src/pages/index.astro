@@ -8,20 +8,18 @@ import Experience from "@/components/Experience.astro"
 import ProfileCheck from "@/components/icons/ProfileCheck.astro"
 import Projects from "@/components/Projects.astro"
 import SectionContainer from "@/components/SectionContainer.astro"
-import Hero from "@/components/Hero.astro"
+import Personal from "@/components/Personal.astro"
 
 ---
 
 <Layout
-  title="Porfolio de Nico Piovano - Desarrollador Web con +5 años de experiencia"
+  title="Porfolio de Nico Piovano - Desarrollador Web con +7 años de experiencia"
   description="Contrata a Nico para crear tu aplicación web o móvil. Desarrollador Web."
 >
   <main class="px-4">
-    <SectionContainer class="py-16 md:py-36">
-      <Hero>
-      </slot>
-    </Hero>
-    </SectionContainer>
+          <SectionContainer class="min-h-screen flex items-center">
+          <Personal />
+      </SectionContainer>
     <div class="space-y-24">
     <SectionContainer id="experiencia">
       <h2
@@ -40,9 +38,9 @@ import Hero from "@/components/Hero.astro"
         <CodeIcon class="size-7" />
         Proyectos
       </h2>
-      <span>(Los últimos que hice, pueden ver todos en mi github 😊)</span>
+      <span>En construcción...</span>
 
-      <Projects />
+      <!--<Projects />-->
     </SectionContainer>
 
     <SectionContainer id="sobre-mi">
@@ -57,3 +55,39 @@ import Hero from "@/components/Hero.astro"
   </div>
   </main>
 </Layout>
+
+<script>
+    let currentScroll = window.scrollY
+    let targetScroll = currentScroll
+    const ease = 0.08
+
+    function smoothScroll() {
+        currentScroll += (targetScroll - currentScroll) * ease
+        window.scrollTo(0, currentScroll)
+        requestAnimationFrame(smoothScroll)
+    }
+
+    window.addEventListener('wheel', (e) => {
+        e.preventDefault()
+        targetScroll += e.deltaY * 0.8 // ← bajá este número = más lento
+        targetScroll = Math.max(
+            0,
+            Math.min(targetScroll, document.body.scrollHeight - window.innerHeight)
+        )
+    }, { passive: false })
+
+    smoothScroll()
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const id = link.getAttribute('href')?.slice(1)
+            const target = document.getElementById(id)
+            if (!target) return
+
+            e.preventDefault()
+
+            targetScroll = target.offsetTop
+        })
+    })
+
+</script>

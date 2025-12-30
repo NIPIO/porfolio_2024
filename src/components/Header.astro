@@ -2,102 +2,101 @@
 import ThemeToggle from "./ThemeToggle.astro"
 
 const navItems = [
-  {
-    title: "Experiencia",
-    label: "experiencia",
-    url: "/#experiencia",
-  },
-  {
-    title: "Proyectos",
-    label: "proyectos",
-    url: "/#proyectos",
-  },
-  {
-    title: "Sobre mí",
-    label: "sobre-mi",
-    url: "/#sobre-mi",
-  },
-  {
-    title: "Contacto",
-    label: "contacto",
-    url: "mailto:nmpiovano@gmail.com",
-  },
+    { title: "Experiencia", section: "experiencia", url: "#experiencia" },
+    { title: "Proyectos", section: "proyectos", url: "#proyectos" },
+    { title: "Sobre mí", section: "sobre-mi", url: "#sobre-mi" },
+    { title: "Contacto", url: "mailto:nmpiovano@gmail.com" },
 ]
 ---
-
-<header
-  class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2"
->
-  <nav
-    class="flex px-3 text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center"
-  >
-    {
-      navItems.map((link) => (
-        <a
-          class="relative block px-2 py-2 transition hover:text-yellow-500 dark:hover:text-yellow-400"
-          aria-label={link.label}
-          href={link.url}
-        >
-          {link.title}
-        </a>
-      ))
-    }
-    <ThemeToggle />
-  </nav>
-</header>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const sections = document.querySelectorAll("section")
-    const navItems = document.querySelectorAll("header nav a")
-
-    const callback = (entries: any[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navItems.forEach((item) => {
-            if (item.getAttribute("aria-label") == entry.target.id) {
-              item.classList.add("text-yellow-500")
-            } else {
-              item.classList.remove("text-yellow-500")
-            }
-          })
+<header class="fixed top-0 z-20 w-full flex justify-center mt-2">
+    <!-- Desktop -->
+    <nav
+            class="hidden md:flex items-center px-3 text-sm font-medium rounded-full
+           bg-white/30 dark:bg-gray-900/30
+           text-gray-600 dark:text-gray-200"
+    >
+        {
+            navItems.map(link => (
+                    <a
+                            href={link.url}
+                            data-section={link.section}
+                            class="nav-link relative px-2 py-2 transition
+                 hover:text-yellow-500 dark:hover:text-yellow-400"
+                    >
+                        {link.title}
+                    </a>
+            ))
         }
-      })
-    }
+        <ThemeToggle />
+    </nav>
 
-    const observer = new IntersectionObserver(callback, {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.3,
+    <!-- Mobile -->
+    <div class="md:hidden relative">
+        <button
+                id="menu-btn"
+                aria-label="Abrir menú"
+                aria-expanded="false"
+                class="flex items-center justify-center w-10 h-10 rounded-full
+             bg-white/70 dark:bg-gray-900/80 backdrop-blur shadow"
+        >
+            ☰
+        </button>
+
+        <div
+                id="menu"
+                class="hidden absolute right-0 mt-3 w-48 rounded-xl
+             bg-white/90 dark:bg-gray-900/90 backdrop-blur
+             shadow-lg ring-1 ring-black/5"
+        >
+            <nav class="flex flex-col p-2 text-sm">
+                {
+                    navItems.map(link => (
+                            <a
+                                    href={link.url}
+                                    data-section={link.section}
+                                    class="nav-link px-3 py-2 rounded-lg transition
+                     hover:bg-yellow-500/10"
+                            >
+                                {link.title}
+                            </a>
+                    ))
+                }
+                <div class="px-3 py-2">
+                    <ThemeToggle />
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+<script>
+    document.addEventListener("astro:page-load", () => {
+        (() => {
+            const btn = document.getElementById("menu-btn")
+            const menu = document.getElementById("menu")
+
+            if (!btn || !menu) return
+
+            const closeMenu = () => {
+                menu.classList.add("hidden")
+                btn.setAttribute("aria-expanded", "false")
+            }
+
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation()
+                const open = !menu.classList.contains("hidden")
+                menu.classList.toggle("hidden")
+                btn.setAttribute("aria-expanded", !open)
+            })
+
+            menu.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", closeMenu)
+            })
+
+            document.addEventListener("click", (e) => {
+                if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                    closeMenu()
+                }
+            })
+        })()
     })
-
-    sections.forEach((section) => {
-      observer.observe(section)
-    })
-
-    // Cleanup function
-    document.onvisibilitychange = () => {
-      if (document.visibilityState === "hidden") {
-        observer.disconnect()
-      } else {
-        sections.forEach((section) => {
-          observer.observe(section)
-        })
-      }
-    }
-  })
 </script>
-
-<style>
-  nav {
-    animation: nav-shadown 1s linear both;
-    animation-timeline: scroll();
-    animation-range: 0 100px;
-  }
-
-  @keyframes nav-shadown {
-    to {
-      @apply shadow-lg ring-1 backdrop-blur dark:bg-gray-800/90 bg-white/50 ring-white/10;
-    }
-  }
-</style>
