@@ -2,9 +2,14 @@
     {...Astro.props}
     target="_blank"
     rel="noopener noreferrer"
-    class="social-pill relative overflow-hidden cursor-pointer inline-flex items-center justify-center gap-2 px-4 py-1 mx-1 text-gray-800 transition bg-gray-100 border border-gray-300 rounded-full dark:bg-gray-800 dark:border-gray-600 dark:text-white text-md group max-w-fit hover:text-white focus:outline-none active:bg-black"
+    class="social-pill relative overflow-hidden cursor-pointer inline-flex items-center justify-center gap-2 px-4 py-1 mx-1
+         text-gray-700 bg-gray-300 border border-gray-300
+         transition rounded-full text-md group max-w-fit
+         dark:bg-gray-800 dark:border-gray-600 dark:text-white
+         focus:outline-none"
 >
-    <!-- glow -->
+
+<!-- glow -->
     <span class="pill-glow pointer-events-none absolute inset-0"></span>
 
     <!-- content -->
@@ -31,6 +36,19 @@
     .social-pill[data-glow="red"] {
         --glow: rgba(250, 80, 40, 0.6);
     }
+
+    .dark .social-pill[data-glow="green"] {
+        --glow: rgba(40, 250, 80, 0.6);
+    }
+
+    .dark .social-pill[data-glow="blue"] {
+        --glow: rgba(40, 80, 250, 0.6);
+    }
+
+    .dark .social-pill[data-glow="red"] {
+        --glow: rgba(250, 80, 40, 0.6);
+    }
+
 
 
     .pill-glow {

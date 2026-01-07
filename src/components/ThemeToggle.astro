@@ -63,13 +63,11 @@ const THEMES = ["Light", "Dark", "System"]
   const themesMenu = document.getElementById("themes-menu")
 
   const getThemePreference = () => {
-    if (typeof localStorage !== "undefined") {
-      return localStorage.getItem("theme") ?? "system"
-    }
+      if (typeof localStorage !== "undefined") {
+          return localStorage.getItem("theme") ?? "dark"
+      }
 
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light"
+      return "dark"
   }
 
   const updateIcon = (themePreference) => {
