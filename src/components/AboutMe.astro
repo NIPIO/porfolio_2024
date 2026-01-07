@@ -3,10 +3,10 @@ const personalImageAlt = "Nico Piovano";
 ---
 
 <article
-        class="about-me flex flex-col md:flex-row items-center justify-center gap-12 w-full h-screen text-gray-700 dark:text-gray-300 px-8"
+        class="about-me flex flex-col md:flex-row items-center justify-center gap-12 w-full text-gray-700 dark:text-gray-300 px-8"
         id="aboutMe">
     <!-- Texto -->
-    <div class="text-section order-2 md:order-1 flex-1 [&>p]:mb-6">
+    <div class="text-section order-2 md:order-1 flex-1 [&>p]:mb-4">
         <p>
             <strong>Inicié mi carrera en programación en 2016</strong>, desarrollando con
             paciencia, confianza y de manera resolutiva los distintos desafios propuestos. </p>
@@ -166,7 +166,7 @@ const personalImageAlt = "Nico Piovano";
                     }
                 });
             },
-            {threshold: 0.2} // 50% visible
+            {threshold: 0.2} // 20% visible
         );
 
         observer.observe(section);
