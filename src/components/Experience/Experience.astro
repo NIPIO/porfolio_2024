@@ -1,0 +1,193 @@
+---
+import ExperienceItem from "@/components/Experience/ExperienceItem.astro";
+import Briefcase from "@/components/icons/Briefcase.astro";
+const EXPERIENCE = [
+    {
+        date: "Ago. 2024 - Actualmente..",
+        title: "Desarrollador Web Fullstack",
+        company: "Servicios Computables S.A.",
+        actual: false,
+        usos: ['Vue', 'Laravel'],
+        description:
+            "Desarrollo de sistemas informáticos para las distintas Municipalidades de la República Argentina.",
+    },
+    {
+        date: "Jun. 2021 - Abr. 2023",
+        title: "Desarrollador Web Fullstack",
+        company: "Servicios Computables S.A.",
+        actual: false,
+        usos: ['Vue', 'Laravel'],
+        description:
+            "Desarrollo de sistemas informáticos para las distintas Municipalidades de la República Argentina.",
+    },
+    {
+        date: "Nov. 2020 - May. 2021",
+        title: "Desarrollador Web Backend",
+        company: "Creative Coefficient",
+        actual: false,
+        usos: ['Laravel', 'Prestashop'],
+        description:
+            "Desarrollo en conjunto de panel administrativo de un sistema de millas reconocido internacionalmente (Smiles).",
+    },
+    {
+        date: "Dic. 2018 - Ene. 2021",
+        title: "Desarrollador Web Fullstack",
+        company: "CNRT (Ministerio de Transporte)",
+        actual: false,
+        usos: ['Symfony', 'AngularJS', 'Angular'],
+        description:
+            "Mantenimiento y desarrollo de sistemas internos y nuevas herramientas para empresas de transporte.",
+    },
+]
+---
+
+<section class="timeline-wrapper">
+    <h2 class="flex items-center mb-6 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white">
+        <Briefcase class="size-8"/>
+        Experiencia laboral
+    </h2>
+
+
+    <div class="timeline-mask">
+        <div class="timeline" id="timeline">
+            <div class="timeline-line"></div>
+
+            {EXPERIENCE.map((exp) => (
+                    <article class="timeline-item">
+                        <!--<span class="dot" class:list={{ actual: exp.actual }}></span>-->
+                        <ExperienceItem experience={exp}/>
+                    </article>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ===== SECTION ===== */
+
+    .experience-section {
+        padding: 4rem 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* ===== MASK (fade edges) ===== */
+
+    .timeline-mask {
+        width: 95%;
+        overflow: hidden;
+
+        /* el fade posta */
+        mask-image: linear-gradient(
+                90deg,
+                transparent 0%,
+                black 6%,
+                black 94%,
+                transparent 100%
+        );
+        -webkit-mask-image: linear-gradient(
+                90deg,
+                transparent 0%,
+                black 6%,
+                black 94%,
+                transparent 100%
+        );
+    }
+
+    /* ===== TIMELINE ===== */
+
+    .timeline {
+        position: relative;
+        display: flex;
+        gap: 4rem;
+        padding: 2rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        overscroll-behavior: contain;
+        scroll-snap-type: x mandatory;
+    }
+
+    .timeline.no-snap {
+        scroll-snap-type: none;
+    }
+
+    .timeline-line {
+        position: absolute;
+        top: 170px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(34, 197, 94, 0.4),
+                transparent
+        );
+    }
+
+    /* ===== ITEM ===== */
+
+    .timeline-item {
+        position: relative;
+        min-width: 380px;
+        scroll-snap-align: center;
+    }
+
+    .dot {
+        position: absolute;
+        top: 163px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 14px;
+        height: 14px;
+        background: #22c55e;
+        border-radius: 50%;
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.15);
+        z-index: 2;
+    }
+
+</style>
+<script>
+    const timeline = document.getElementById('timeline')
+    let snapTimeout
+
+    if (timeline) {
+        timeline.addEventListener(
+            'wheel',
+            (e) => {
+                if (window.innerWidth < 768) return
+
+                const maxScrollLeft =
+                    timeline.scrollWidth - timeline.clientWidth
+                const isAtStart = timeline.scrollLeft <= 0
+                const isAtEnd = timeline.scrollLeft >= maxScrollLeft - 1
+
+                const scrollingRight = e.deltaY > 0
+                const scrollingLeft = e.deltaY < 0
+
+                // 🔓 Si ya no hay más scroll horizontal, liberar el scroll vertical
+                if (
+                    (isAtEnd && scrollingRight) ||
+                    (isAtStart && scrollingLeft)
+                ) {
+                    timeline.classList.remove('no-snap')
+                    return
+                }
+
+                // 🔒 Mientras haya scroll horizontal, lo interceptamos
+                e.preventDefault()
+                e.stopPropagation()
+
+                timeline.classList.add('no-snap')
+                timeline.scrollLeft += e.deltaY * 0.8
+
+                clearTimeout(snapTimeout)
+                snapTimeout = setTimeout(() => {
+                    timeline.classList.remove('no-snap')
+                }, 150)
+            },
+            {passive: false}
+        )
+    }
+</script>
