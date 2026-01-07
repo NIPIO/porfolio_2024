@@ -80,7 +80,7 @@ const {experience} = Astro.props
         padding: 0.25rem 0.6rem;
         border-radius: 999px;
         background: rgba(34, 197, 94, 0.15);
-        //color: #6bb184;
+        /*color: #6bb184;*/
     }
 
     /* ===== TEXT ===== */
@@ -124,3 +124,15 @@ const {experience} = Astro.props
         color: var(--custom-green, #6bb184);
     }
 </style>
+<script>
+    const timeline = document.getElementById('timeline')
+    const line = timeline?.querySelector('.timeline-line')
+
+    function updateLineWidth() {
+        if (!timeline || !line) return
+        line.style.width = timeline.scrollWidth + 'px'
+    }
+
+    updateLineWidth()
+    window.addEventListener('resize', updateLineWidth)
+</script>
