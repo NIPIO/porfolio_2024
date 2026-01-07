@@ -10,6 +10,7 @@ export default {
                 "cornsilk": "#fefae0ff",
                 "earth-yellow": "#dda15eff",
                 "tigers-eye": "#bc6c25ff",
+                "custom-green": "#22c55e",
             }
         },
     },
