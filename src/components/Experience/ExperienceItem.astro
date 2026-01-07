@@ -1,6 +1,13 @@
 ---
 interface Props {
-    experience: object
+    experience: {
+        date: string
+        title: string
+        company: string
+        usos: string[]
+        description: string
+        aprendizajes?: string
+    }
 }
 
 const {experience} = Astro.props
@@ -21,6 +28,15 @@ const {experience} = Astro.props
     )}
 
     <p class="description">{experience.description}</p>
+
+    {experience.aprendizajes && (
+            <div class="learning">
+                <span class="learning-icon">💡</span>
+                <p>
+                    <strong>Aprendizajes:</strong> {experience.aprendizajes}
+                </p>
+            </div>
+    )}
 </div>
 
 <style>
@@ -32,6 +48,8 @@ const {experience} = Astro.props
         border-radius: 16px;
         padding: 1.5rem;
     }
+
+    /* ===== HEADER ===== */
 
     .date {
         font-size: 0.8rem;
@@ -62,8 +80,10 @@ const {experience} = Astro.props
         padding: 0.25rem 0.6rem;
         border-radius: 999px;
         background: rgba(34, 197, 94, 0.15);
-        color: #6bb184;
+        //color: #6bb184;
     }
+
+    /* ===== TEXT ===== */
 
     .description {
         font-size: 0.9rem;
@@ -71,14 +91,36 @@ const {experience} = Astro.props
         opacity: 0.85;
     }
 
-    /* ===== SCROLLBAR ===== */
+    /* ===== LEARNING BLOCK ===== */
 
-    .timeline::-webkit-scrollbar {
-        height: 6px;
+    .learning {
+        margin-top: 1rem;
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-start;
+
+        background: linear-gradient(
+                135deg,
+                rgba(34, 197, 94, 0.12),
+                rgba(34, 197, 94, 0.04)
+        );
+
+        border: 1px dashed rgba(34, 197, 94, 0.35);
     }
 
-    .timeline::-webkit-scrollbar-thumb {
-        background: rgba(34, 197, 94, 0.6);
-        border-radius: 999px;
+    .learning-icon {
+        font-size: 1.1rem;
+        line-height: 1.2;
+    }
+
+    .learning p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .learning strong {
+        color: var(--custom-green, #6bb184);
     }
 </style>
