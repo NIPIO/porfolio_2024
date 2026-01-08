@@ -1,0 +1,73 @@
+---
+import ExperienceItem from "@/modules/Experience/ExperienceItem.astro";
+import Briefcase from "@/components/icons/Briefcase.astro";
+import "./Experience.astro.css"
+
+const EXPERIENCE = [
+    {
+        date: "Ago. 2024 - Actualmente..",
+        title: "Desarrollador Web Fullstack",
+        company: "Servicios Computables S.A.",
+        actual: false,
+        usos: ['Vue', 'Laravel', 'Docker', 'MySQL'],
+        description:
+            "Desarrollo de sistemas informáticos para las distintas Municipalidades de la República Argentina.",
+        aprendizajes: "Perfeccionamiento de tecnologías frontend. Reutilización de componentes y estados de Vue. Mejora en el uso de Docker."
+
+    },
+    {
+        date: "Jun. 2021 - Abr. 2023",
+        title: "Desarrollador Web Fullstack",
+        company: "Servicios Computables S.A.",
+        actual: false,
+        usos: ['React', 'Laravel', 'Docker', 'MySQL'],
+        description:
+            "Desarrollo de sistemas informáticos para las distintas Municipalidades de la República Argentina.",
+        aprendizajes: "Desarrollo personal y laboral en frontend. Manejo de estados y hooks de React. Desarrollo de test unitarios."
+
+    },
+    {
+        date: "Nov. 2020 - May. 2021",
+        title: "Desarrollador Web Backend",
+        company: "Creative Coefficient",
+        actual: false,
+        usos: ['Prestashop', 'React', 'Docker'],
+        description:
+            "Desarrollo en conjunto de panel administrativo de un sistema de millas reconocido internacionalmente (Smiles).",
+        aprendizajes: "Manejo de CMS, comunicación directa con clientes de Estados Unidos mediante dailies en inglés."
+
+    },
+    {
+        date: "Dic. 2018 - Ene. 2021",
+        title: "Desarrollador Web Fullstack",
+        company: "CNRT (Ministerio de Transporte)",
+        actual: false,
+        usos: ['Symfony', 'AngularJS', 'Angular', 'MySQL'],
+        description:
+            "Mantenimiento y desarrollo de sistemas internos y externos para transportes públicos de corta y larga distancia.",
+        aprendizajes: "Inicio como Trainee. Lenguaje puro a Frameworks. Sólida base en seguridad, arquitectura de datos y optimización de consultas SQL."
+    },
+]
+---
+
+<section class="timeline-wrapper">
+    <h2 class="flex items-center mb-6 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white">
+        <Briefcase class="size-8"/>
+        Experiencia laboral
+    </h2>
+
+
+    <div class="timeline-mask">
+        <div class="timeline" id="timeline">
+            <div class="timeline-line"></div>
+
+            {EXPERIENCE.map((exp) => (
+                    <article class="timeline-item">
+                        <!--<span class="dot" class:list={{ actual: exp.actual }}></span>-->
+                        <ExperienceItem experience={exp}/>
+                    </article>
+            ))}
+        </div>
+    </div>
+</section>
+<script src="./Experience.astro.js"></script>

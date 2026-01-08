@@ -1,0 +1,49 @@
+---
+const personalImageAlt = "Nico Piovano"
+import Badge from "@/modules/Badge/Badge.astro"
+import LinkedInIcon from "@/components/icons/LinkedIn.astro"
+import CvIcon from "@/components/icons/Cv.astro"
+import MailIcon from "@/components/icons/Mail.astro"
+import SocialPill from "@/modules/SocialPill/SocialPill.astro"
+import {Image} from "astro:assets";
+---
+
+<div class="max-w-xl">
+    <div class="flex gap-4 mb-4">
+        <Image src="/NicoPhotoMini.png" alt={personalImageAlt} width={64} height={64}
+               class="rounded-full shadow-lg size-16" loading="eager"/>
+        <a href="https://linkedin.com/in/nmpiovano" target="_blank" rel="noopener"
+           class="flex items-center transitiondark:text-gray-300 md:justify-center md:hover:scale-105">
+            <Badge>Disponible para trabajar</Badge>
+        </a>
+    </div>
+    <h1 class="text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white">
+        Nicolás Piovano </h1>
+    <div class="mt-6 text-xl">
+        <p class="text-gray-700 dark:text-gray-300">
+            +7 años de experiencia. </p>
+
+        <div class="mt-1">
+            <!--🖥️-->
+            <span class="text-custom-green-dark dark:text-custom-green">Desarrollador Fullstack </span>
+            <span class="dark-text-white">· Javascript & Laravel </span>
+        </div>
+    </div>
+
+    <nav class="flex flex-wrap gap-4 mt-8">
+        <SocialPill href="mailto:nmpiovano@gmail.com">
+            <MailIcon class="size-4"/>
+            Hablemos
+        </SocialPill>
+
+        <SocialPill href="https://linkedin.com/in/nmpiovano">
+            <LinkedInIcon class="size-4"/>
+            LinkedIn
+        </SocialPill>
+
+        <SocialPill href="/CV_NICO_PIOVANO_2024.pdf" download>
+            <CvIcon class="size-4"/>
+            Cv 2026
+        </SocialPill>
+    </nav>
+</div>

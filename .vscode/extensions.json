@@ -1,4 +1,7 @@
 {
-  "recommendations": ["astro-build.astro-vscode"],
-  "unwantedRecommendations": []
+  "recommendations": [
+    "eamodio.gitlens",
+    "waderyan.gitblame",
+    "mhutchie.git-graph"
+  ]
 }
