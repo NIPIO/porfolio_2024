@@ -1,45 +1,3 @@
----
-interface Props {
-    experience: {
-        date: string
-        title: string
-        company: string
-        usos: string[]
-        description: string
-        aprendizajes?: string
-    }
-}
-
-const {experience} = Astro.props
----
-
-<div class="card">
-    <time class="date">{experience.date}</time>
-
-    <h3 class="role">{experience.title}</h3>
-    <p class="company text-custom-green">{experience.company}</p>
-
-    {experience.usos.length > 0 && (
-            <ul class="stack">
-                {experience.usos.map((tech) => (
-                        <li>{tech}</li>
-                ))}
-            </ul>
-    )}
-
-    <p class="description">{experience.description}</p>
-
-    {experience.aprendizajes && (
-            <div class="learning">
-                <span class="learning-icon">💡</span>
-                <p>
-                    <strong class="text-green-800 dark:text-green-600">Aprendizajes:</strong> {experience.aprendizajes}
-                </p>
-            </div>
-    )}
-</div>
-
-<style>
     /* ===== CARD ===== */
 
     .card {
@@ -137,17 +95,3 @@ const {experience} = Astro.props
         line-height: 1.4;
     }
 
-
-</style>
-<script>
-    const timeline = document.getElementById('timeline')
-    const line = timeline?.querySelector('.timeline-line')
-
-    function updateLineWidth() {
-        if (!timeline || !line) return
-        line.style.width = timeline.scrollWidth + 'px'
-    }
-
-    updateLineWidth()
-    window.addEventListener('resize', updateLineWidth)
-</script>

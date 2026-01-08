@@ -1,0 +1,28 @@
+.social-pill {
+    --x: 50%;
+    --y: 50%;
+    --glow: #32990a77;
+}
+
+.dark .social-pill {
+    --glow: #22c55e;
+}
+
+.pill-glow {
+    background: radial-gradient(
+            120px circle at var(--x) var(--y),
+            var(--glow),
+            transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.social-pill:hover .pill-glow {
+    opacity: 1;
+}
+
+.social-pill:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}

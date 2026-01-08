@@ -1,0 +1,19 @@
+---
+import "./SocialPill.astro.css"
+---
+<a {...Astro.props} target="_blank" rel="noopener noreferrer" class="social-pill relative overflow-hidden cursor-pointer inline-flex items-center justify-center gap-2 px-4 py-1 mx-1
+         text-gray-700 border border-custom-green-dark
+         transition rounded-full text-md group max-w-fit
+         bg-gray-800 dark:border-gray-600 text-white 
+         focus:outline-none">
+
+    <!-- glow -->
+    <span class="pill-glow pointer-events-none absolute inset-0"></span>
+
+    <!-- content -->
+    <span class="relative z-10 flex items-center gap-2">
+    <slot/>
+  </span>
+</a>
+
+<script src="./SocialPill.astro.js"></script>

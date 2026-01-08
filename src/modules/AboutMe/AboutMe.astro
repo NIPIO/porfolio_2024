@@ -1,0 +1,43 @@
+---
+const personalImageAlt = "Nico Piovano";
+import "./AboutMe.astro.css"
+---
+
+<article
+        class="about-me flex flex-col md:flex-row items-center justify-center gap-12 w-full text-gray-700 dark:text-gray-300 px-8"
+        id="aboutMe">
+    <!-- Texto -->
+    <div class="text-section order-2 md:order-1 flex-1 [&>p]:mb-4">
+        <p>
+            <strong>Inicié mi carrera en programación en 2016</strong>, desarrollando con
+            paciencia, confianza y de manera resolutiva los distintos desafios propuestos. </p>
+
+        <p>
+            Me adapto rápidamente a nuevas tecnologías y proyectos, y siempre busco
+            <strong>soluciones pragmáticas</strong> que permitan avanzar de manera efectiva, incluso en entornos
+            desafiantes. </p>
+
+        <p>
+            Además, he viajado y vivido por varios países de Latinoamérica mientras trabajaba en hostels, lo que
+            fortaleció mis
+            <strong>habilidades sociales, la adaptabilidad </strong>y la capacidad de colaborar con equipos diversos.
+        </p>
+
+        <p>
+            Mis metas actuales incluyen expandirme en el <strong>ámbito freelance</strong> y aplicar mi enfoque
+            resolutivo y adaptable para generar resultados concretos en cada proyecto. </p>
+    </div>
+
+
+    <!-- Imagen -->
+    <div class="image-wrapper order-1 md:order-2 flex-1 relative group flex justify-center items-center">
+        <img src="/NicoPhoto.png" alt={personalImageAlt}
+             class="rounded-2xl w-72 md:w-80 aspect-square object-cover p-2 rotate-3 bg-black/20 dark:bg-yellow-500/5 ring-1 ring-black/70 dark:ring-white/20 transition-transform duration-500 group-hover:rotate-0 group-hover:scale-110 shadow-2xl"
+             style="object-position: 50% 50%">
+
+        <!-- Glow animado -->
+        <span class="absolute inset-0 rounded-2xl bg-green-custom/40 blur-4xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none"></span>
+    </div>
+</article>
+
+<script src="./AboutMe.astro.js"></script>

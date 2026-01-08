@@ -1,0 +1,19 @@
+:root {
+    --green-custom: #6bb184;
+}
+
+.text-section p strong {
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 1.25em;
+    color: var(--green-custom);
+    transition: color 0.3s;
+}
+
+.image-wrapper {
+    position: relative;
+}
+
+.image-wrapper img {
+    will-change: transform;
+}
