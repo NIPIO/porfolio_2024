@@ -11,6 +11,8 @@ export default {
                 "earth-yellow": "#dda15eff",
                 "tigers-eye": "#bc6c25ff",
                 "custom-green": "#22c55e",
+                "custom-green-dark": "#103900",
+                "charcoal-brown": "#34403A",
             }
         },
     },

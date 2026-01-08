@@ -1,7 +1,7 @@
 <a {...Astro.props} target="_blank" rel="noopener noreferrer" class="social-pill relative overflow-hidden cursor-pointer inline-flex items-center justify-center gap-2 px-4 py-1 mx-1
-         text-gray-700 bg-gray-300 border border-gray-300
+         text-gray-700 border border-custom-green-dark
          transition rounded-full text-md group max-w-fit
-         dark:bg-gray-800 dark:border-gray-600 dark:text-white
+         bg-gray-800 dark:border-gray-600 text-white 
          focus:outline-none">
 
     <!-- glow -->
@@ -17,11 +17,11 @@
     .social-pill {
         --x: 50%;
         --y: 50%;
-        --glow: #22c55e;
+        --glow: #32990a77;
     }
 
     .dark .social-pill {
-        --glow: rgba(40, 250, 80, 0.6);
+        --glow: #22c55e;
     }
 
     .pill-glow {
