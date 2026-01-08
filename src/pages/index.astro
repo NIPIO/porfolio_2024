@@ -74,7 +74,9 @@ import Personal from "@/components/Personal.astro"
 
             e.preventDefault()
 
-            targetScroll = target.offsetTop
+            // Ajustar el scroll para dejar espacio para el header fijo (aprox 80px)
+            const headerOffset = 80
+            targetScroll = target.offsetTop - headerOffset
         })
     })
 
