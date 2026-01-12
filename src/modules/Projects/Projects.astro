@@ -11,16 +11,19 @@ const TAGS = {
     name: "Quasar",
     class: "bg-[#7a95ff] text-white",
     icon: Quasar,
+    url: "https://quasar.dev",
   },
   VUE: {
     name: "Vue",
     class: "bg-[#42b883] text-white",
     icon: Vue,
+    url: "https://vuejs.org",
   },
   TAILWIND: {
     name: "Tailwind CSS",
     class: "bg-[#003159] text-white",
     icon: Tailwind,
+    url: "https://tailwindcss.com",
   },
 }
 
@@ -94,12 +97,15 @@ const PROJECTS = [
                 <ul class="flex flex-wrap gap-2 mt-3">
                   {project.tags.map((tag) => (
                     <li>
-                      <span
-                        class={`flex items-center gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}
+                      <a
+                        href={tag.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class={`flex items-center gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 hover:opacity-80 transition-opacity`}
                       >
                         <tag.icon class="size-4" />
                         {tag.name}
-                      </span>
+                      </a>
                     </li>
                   ))}
                 </ul>

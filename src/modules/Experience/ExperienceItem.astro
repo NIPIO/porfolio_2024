@@ -8,10 +8,11 @@ interface Props {
         description: string
         aprendizajes?: string
     }
+    techUrls: Record<string, string>
 }
 
 import "./ExperienceItem.astro.css"
-const {experience} = Astro.props
+const {experience, techUrls} = Astro.props
 ---
 
 <div class="card">
@@ -22,9 +23,23 @@ const {experience} = Astro.props
 
     {experience.usos.length > 0 && (
             <ul class="stack">
-                {experience.usos.map((tech) => (
+                {experience.usos.map((tech) => {
+                    const url = techUrls[tech]
+                    return url ? (
+                        <li>
+                            <a 
+                                href={url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                class="hover:opacity-80 transition-opacity"
+                            >
+                                {tech}
+                            </a>
+                        </li>
+                    ) : (
                         <li>{tech}</li>
-                ))}
+                    )
+                })}
             </ul>
     )}
 

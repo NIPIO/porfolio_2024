@@ -3,6 +3,18 @@ import ExperienceItem from "@/modules/Experience/ExperienceItem.astro";
 import Briefcase from "@/components/icons/Briefcase.astro";
 import "./Experience.astro.css"
 
+const TECH_URLS: Record<string, string> = {
+  'Vue': 'https://vuejs.org',
+  'Laravel': 'https://laravel.com',
+  'Docker': 'https://www.docker.com',
+  'MySQL': 'https://www.mysql.com',
+  'React': 'https://react.dev',
+  'Prestashop': 'https://www.prestashop.com',
+  'Symfony': 'https://symfony.com',
+  'AngularJS': 'https://angularjs.org',
+  'Angular': 'https://angular.io',
+}
+
 const EXPERIENCE = [
     {
         date: "Ago. 2024 - Actualmente..",
@@ -64,7 +76,7 @@ const EXPERIENCE = [
             {EXPERIENCE.map((exp) => (
                     <article class="timeline-item">
                         <!--<span class="dot" class:list={{ actual: exp.actual }}></span>-->
-                        <ExperienceItem experience={exp}/>
+                        <ExperienceItem experience={exp} techUrls={TECH_URLS}/>
                     </article>
             ))}
         </div>
