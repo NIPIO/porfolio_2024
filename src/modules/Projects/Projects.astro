@@ -64,7 +64,7 @@ const PROJECTS = [
 ]
 ---
 
-<section class="relative h-[350vh]">
+<section class="relative h-[250vh] md:h-[350vh] md:-mt-[60px]">
   <!-- CONTENEDOR STICKY -->
   <div class="sticky top-0 h-screen overflow-hidden">
     <div class="relative w-full h-full flex items-center justify-center">
@@ -72,7 +72,7 @@ const PROJECTS = [
         <div class="card" data-index={i}>
           <div class="box">
             <!-- CONTENIDO DEL PROYECTO -->
-            <article class="flex flex-col md:flex-row gap-8 w-full h-full p-8">
+            <article class="flex flex-col md:flex-row gap-8 w-full h-full p-4 md:p-8">
               <!-- Imagen -->
               <div class="w-full md:w-1/2 flex items-center justify-center">
                 <div class="relative overflow-hidden rounded-xl shadow-lg">
@@ -146,6 +146,24 @@ const PROJECTS = [
 
   transition: transform 0.06s linear;
   will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .card {
+    top: 10%;
+    left: 5%;
+    width: 90%;
+    height: 75%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    top: 5%;
+    left: 2.5%;
+    width: 95%;
+    height: 85%;
+  }
 }
 
 .box {

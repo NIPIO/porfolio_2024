@@ -1,6 +1,9 @@
+document.addEventListener("astro:page-load", () => {
   let remove = null
   const matchMedia = window.matchMedia("(prefers-color-scheme: dark)")
   const themesMenu = document.getElementById("themes-menu")
+  
+  if (!themesMenu) return
 
   const getThemePreference = () => {
       if (typeof localStorage !== "undefined") {
@@ -36,17 +39,29 @@
 
   updateTheme()
 
-  document.addEventListener("click", () => themesMenu.classList.remove("open"))
-
-  document.getElementById("theme-toggle-btn").addEventListener("click", (e) => {
-    e.stopPropagation()
-    const isClosed = !themesMenu.classList.contains("open")
-    themesMenu.classList[isClosed ? "add" : "remove"]("open")
+  document.addEventListener("click", (e) => {
+    const themeToggleBtn = document.getElementById("theme-toggle-btn")
+    if (themeToggleBtn && !themesMenu.contains(e.target) && !themeToggleBtn.contains(e.target)) {
+      themesMenu.classList.remove("open")
+    }
   })
+
+  const themeToggleBtn = document.getElementById("theme-toggle-btn")
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation()
+      e.preventDefault()
+      const isClosed = !themesMenu.classList.contains("open")
+      themesMenu.classList[isClosed ? "add" : "remove"]("open")
+    })
+  }
 
   document.querySelectorAll(".themes-menu-option").forEach((element) => {
     element.addEventListener("click", (e) => {
+      e.stopPropagation()
       localStorage.setItem("theme", e.target.innerText.toLowerCase().trim())
       updateTheme()
+      themesMenu.classList.remove("open")
     })
   })
+})
