@@ -115,6 +115,7 @@
     overflow-x: visible !important;
     overflow-y: visible !important;
     padding: 2rem 0 !important;
+    position: relative !important;
 }
 
 .timeline-wrapper.effects-disabled .timeline-mask {
@@ -132,6 +133,7 @@
 .timeline-wrapper.effects-disabled .timeline-item {
     min-width: 0 !important;
     width: 100% !important;
+    flex-shrink: 0 !important;
 }
 
 .dot {

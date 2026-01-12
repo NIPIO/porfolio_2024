@@ -89,6 +89,24 @@ import ThreeScene from "@/modules/ThreeScene/ThreeScene.astro"
         }
 
         const handleWheel = (e) => {
+            // No interceptar si el usuario está haciendo scroll en el timeline
+            const timeline = document.getElementById('timeline')
+            const timelineWrapper = document.querySelector('.timeline-wrapper')
+            
+            if (timeline && timelineWrapper) {
+                const timelineRect = timelineWrapper.getBoundingClientRect()
+                const isInTimeline = 
+                    e.clientY >= timelineRect.top && 
+                    e.clientY <= timelineRect.bottom &&
+                    e.clientX >= timelineRect.left &&
+                    e.clientX <= timelineRect.right
+                
+                // Si hay scroll horizontal en el timeline, no interceptar
+                if (isInTimeline && (Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey)) {
+                    return
+                }
+            }
+            
             e.preventDefault()
             targetScroll += e.deltaY * 0.8
             targetScroll = Math.max(

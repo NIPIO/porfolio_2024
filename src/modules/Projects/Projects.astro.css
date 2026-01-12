@@ -1,0 +1,58 @@
+.card {
+  position: absolute;
+  top: 18%;
+  left: 10%;
+  width: 80%;
+  height: 62%;
+  border-radius: 2rem;
+
+  transform:
+    translateY(calc(var(--p, 0) * 140px))
+    scale(calc(1 - var(--p, 0) * 0.22));
+
+  transition: transform 0.06s linear;
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .card {
+    top: 10%;
+    left: 5%;
+    width: 90%;
+    height: 75%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    top: 5%;
+    left: 2.5%;
+    width: 95%;
+    height: 85%;
+  }
+}
+
+.box {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+
+  background: radial-gradient(
+    ellipse at top right,
+    rgba(120,216,115,0.35),
+    rgba(255,255,255,0.96)
+  );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* DARK */
+:global(html.dark) .box {
+  background: radial-gradient(
+    ellipse at top right,
+    rgba(120,216,115,0.25),
+    rgba(15,23,42,0.95)
+  );
+}
