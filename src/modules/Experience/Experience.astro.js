@@ -1,7 +1,9 @@
 function initExperienceScroll() {
   // Verificar si se deben deshabilitar los efectos
   const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-  const disableEffects = localStorage.getItem('disable-3d-effects') === 'true'
+  // Verificar primero sessionStorage, luego localStorage
+  const disableEffects = sessionStorage.getItem('disable-3d-effects-session') === 'true' || 
+                        localStorage.getItem('disable-3d-effects') === 'true'
   
   const timeline = document.getElementById('timeline')
   const timelineWrapper = document.querySelector('.timeline-wrapper')

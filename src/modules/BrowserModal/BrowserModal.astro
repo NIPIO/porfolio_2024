@@ -60,28 +60,37 @@
     
     if (!modal || !closeBtn || !continueBtn) return
     
-    // Verificar si ya se mostró el modal antes
-    const modalShown = localStorage.getItem('browser-modal-shown')
-    
     // Detectar si es Firefox
     const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
     
-    // Mostrar modal solo si no es Firefox y no se ha mostrado antes
-    if (!isFirefox && !modalShown) {
+    // Si no hay sesi?n activa, limpiar localStorage de efectos deshabilitados
+    // Esto asegura que cada nueva sesi?n empiece limpia
+    if (!sessionStorage.getItem('disable-3d-effects-session')) {
+      localStorage.removeItem('disable-3d-effects')
+    }
+    
+    // Verificar si el modal ya se mostr? en esta sesi?n
+    const modalShownThisSession = sessionStorage.getItem('browser-modal-shown-session')
+    
+    // Mostrar modal siempre si no es Firefox y no se ha mostrado en esta sesi?n
+    if (!isFirefox && !modalShownThisSession) {
       modal.classList.remove('hidden')
       modal.classList.add('flex')
     }
     
-    // Función para cerrar el modal
+    // Funci?n para cerrar el modal
     const closeModal = (disableEffects = false) => {
       modal.classList.add('hidden')
       modal.classList.remove('flex')
-      localStorage.setItem('browser-modal-shown', 'true')
       
-      // Si el usuario decidió continuar sin Firefox, deshabilitar efectos
+      // Marcar que el modal se mostr? en esta sesi?n (solo para esta sesi?n, no persiste)
+      sessionStorage.setItem('browser-modal-shown-session', 'true')
+      
+      // Si el usuario decidi? continuar sin Firefox, deshabilitar efectos solo para esta sesi?n
       if (disableEffects && !isFirefox) {
+        sessionStorage.setItem('disable-3d-effects-session', 'true')
         localStorage.setItem('disable-3d-effects', 'true')
-        // Disparar evento para que ThreeScene se actualice
+        // Disparar evento para que los componentes se actualicen
         window.dispatchEvent(new CustomEvent('disable-3d-effects'))
       }
     }
@@ -104,7 +113,7 @@
     })
   }
   
-  // Inicializar cuando el DOM esté listo
+  // Inicializar cuando el DOM est? listo
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initBrowserModal)
   } else {

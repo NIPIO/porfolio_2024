@@ -7,7 +7,9 @@
   async function initThreeScene() {
     // Verificar si se deben deshabilitar los efectos 3D
     const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-    const disableEffects = localStorage.getItem('disable-3d-effects') === 'true'
+    // Verificar primero sessionStorage, luego localStorage
+    const disableEffects = sessionStorage.getItem('disable-3d-effects-session') === 'true' || 
+                          localStorage.getItem('disable-3d-effects') === 'true'
     
     // Si no es Firefox y el usuario decidió continuar sin efectos, ocultar el contenedor
     if (!isFirefox && disableEffects) {
