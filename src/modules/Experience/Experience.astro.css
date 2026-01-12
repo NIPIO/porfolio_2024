@@ -6,6 +6,11 @@
     justify-content: center;
 }
 
+.timeline-wrapper {
+    width: 100%;
+    max-width: 100%;
+}
+
 /* ===== MASK (fade edges) ===== */
 
 .timeline-mask {
@@ -49,6 +54,12 @@
     scroll-behavior: smooth;
     overscroll-behavior: contain;
     scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.timeline::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 
 @media (max-width: 768px) {
@@ -94,6 +105,33 @@
     .timeline-item {
         min-width: calc(100vw - 2rem);
     }
+}
+
+/* Estilos para cuando los efectos están deshabilitados (modo grid) */
+.timeline-wrapper.effects-disabled .timeline {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr)) !important;
+    gap: 2rem !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    padding: 2rem 0 !important;
+}
+
+.timeline-wrapper.effects-disabled .timeline-mask {
+    width: 100% !important;
+    margin-left: 0 !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+    overflow: visible !important;
+}
+
+.timeline-wrapper.effects-disabled .timeline-line {
+    display: none !important;
+}
+
+.timeline-wrapper.effects-disabled .timeline-item {
+    min-width: 0 !important;
+    width: 100% !important;
 }
 
 .dot {

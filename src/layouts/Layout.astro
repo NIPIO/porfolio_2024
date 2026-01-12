@@ -3,6 +3,7 @@ import "@fontsource-variable/onest"
 
 import Header from "../modules/Header/Header.astro"
 import Footer from "../modules/Footer/Footer.astro"
+import BrowserModal from "../modules/BrowserModal/BrowserModal.astro"
 import {ViewTransitions} from "astro:transitions"
 
 interface Props {
@@ -30,6 +31,7 @@ const {description, title} = Astro.props
     dark:bg-[radial-gradient(ellipse_100%_80%_at_80%_-20%,rgba(120,216,115,0.3),rgba(255,255,255,0))]">
   </div>
   
+<BrowserModal/>
 <Header/>
 <slot/>
 <Footer/>

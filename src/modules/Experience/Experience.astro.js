@@ -1,8 +1,24 @@
-const timeline = document.getElementById('timeline')
-const timelineWrapper = document.querySelector('.timeline-wrapper')
-let snapTimeout
+function initExperienceScroll() {
+  // Verificar si se deben deshabilitar los efectos
+  const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+  const disableEffects = localStorage.getItem('disable-3d-effects') === 'true'
+  
+  // Si no es Firefox y los efectos están deshabilitados, no inicializar scroll
+  if (!isFirefox && disableEffects) {
+    const timelineWrapper = document.querySelector('.timeline-wrapper')
+    
+    if (timelineWrapper) {
+      // Agregar clase para aplicar estilos CSS
+      timelineWrapper.classList.add('effects-disabled')
+    }
+    return
+  }
 
-if (timeline && timelineWrapper) {
+  const timeline = document.getElementById('timeline')
+  const timelineWrapper = document.querySelector('.timeline-wrapper')
+  let snapTimeout
+
+  if (timeline && timelineWrapper) {
     const handleWheel = (e) => {
         if (window.innerWidth < 768) return
 
@@ -47,4 +63,18 @@ if (timeline && timelineWrapper) {
     // Escuchar el evento wheel en toda la sección y en el timeline
     timelineWrapper.addEventListener('wheel', handleWheel, {passive: false})
     timeline.addEventListener('wheel', handleWheel, {passive: false})
+  }
 }
+
+// Inicializar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initExperienceScroll)
+} else {
+  initExperienceScroll()
+}
+
+// Reinicializar en transiciones de Astro
+document.addEventListener('astro:page-load', initExperienceScroll)
+
+// Escuchar evento para deshabilitar efectos
+window.addEventListener('disable-3d-effects', initExperienceScroll)
