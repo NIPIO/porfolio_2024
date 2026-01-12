@@ -2,29 +2,34 @@
 import ThemeToggle from "@/modules/ThemeToggle/ThemeToggle.astro"
 
 const navItems = [
-    { title: "Experiencia", section: "experiencia", url: "#experiencia" },
-    { title: "Proyectos", section: "proyectos", url: "#proyectos" },
-    { title: "Sobre mí", section: "sobre-mi", url: "#sobre-mi" },
-    { title: "Contacto", url: "mailto:nmpiovano@gmail.com" },
+  { title: "Experiencia", section: "experiencia", url: "#experiencia" },
+  { title: "Proyectos", section: "proyectos", url: "#proyectos" },
+  { title: "Sobre mí", section: "sobre-mi", url: "#sobre-mi" },
+  {
+    title: "Curriculum",
+    url: "/CV_NICO_PIOVANO_2024.pdf",
+    download: true
+  }
 ]
 ---
 <header class="fixed top-0 z-20 w-full flex justify-center mt-2">
     <!-- Desktop -->
     <nav
             class="hidden md:flex items-center px-3 text-sm font-medium rounded-full
-           bg-white/30 dark:bg-gray-900/30
+           bg-gray-300 dark:bg-gray-600
            text-gray-600 dark:text-gray-200"
     >
         {
             navItems.map(link => (
-                    <a
-                            href={link.url}
-                            data-section={link.section}
-                            class="nav-link relative px-2 py-2 transition
-                 hover:text-custom-green-dark dark:hover:text-custom-green"
-                    >
-                        {link.title}
-                    </a>
+                <a
+                href={link.url}
+                data-section={link.section}
+                {...(link.download ? { download: '' } : {})}
+                class="nav-link relative px-2 py-2 transition
+                        hover:text-green-600 dark:hover:text-custom-green"
+                >
+                {link.title}
+                </a>
             ))
         }
         <ThemeToggle />
@@ -55,7 +60,7 @@ const navItems = [
                                     href={link.url}
                                     data-section={link.section}
                                     class="nav-link px-3 py-2 rounded-lg transition
-                     hover:bg-yellow-500/10"
+                     hover:bg-green-500/10 dark:hover:bg-green-500/10"
                             >
                                 {link.title}
                             </a>

@@ -1,13 +1,18 @@
 :root {
-    --green-custom: #6bb184;
+    --green-custom: #2fb85f8c;
+    --green-custom-dark: #05451c;
 }
 
 .text-section p strong {
     font-family: monospace;
     font-weight: 700;
     font-size: 1.25em;
-    color: var(--green-custom);
+    color: var(--green-custom-dark);
     transition: color 0.3s;
+}
+
+.dark .text-section p strong {
+    color: var(--green-custom);
 }
 
 .image-wrapper {

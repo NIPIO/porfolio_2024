@@ -22,7 +22,11 @@ document.addEventListener("astro:page-load", () => {
         })
 
         document.addEventListener("click", (e) => {
-            if (!menu.contains(e.target) && !btn.contains(e.target)) {
+            const themeToggle = document.getElementById("theme-toggle-btn")
+            const themesMenu = document.getElementById("themes-menu")
+            const isThemeToggleClick = themeToggle && (themeToggle.contains(e.target) || themesMenu?.contains(e.target))
+            
+            if (!menu.contains(e.target) && !btn.contains(e.target) && !isThemeToggleClick) {
                 closeMenu()
             }
         })

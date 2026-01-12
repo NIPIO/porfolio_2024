@@ -30,6 +30,13 @@
     );
 }
 
+@media (max-width: 768px) {
+    .timeline-mask {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
 /* ===== TIMELINE ===== */
 
 .timeline {
@@ -42,6 +49,13 @@
     scroll-behavior: smooth;
     overscroll-behavior: contain;
     scroll-snap-type: x mandatory;
+}
+
+@media (max-width: 768px) {
+    .timeline {
+        gap: 2rem;
+        padding: 1rem;
+    }
 }
 
 .timeline.no-snap {
@@ -68,6 +82,18 @@
     position: relative;
     min-width: 380px;
     scroll-snap-align: center;
+}
+
+@media (max-width: 768px) {
+    .timeline-item {
+        min-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .timeline-item {
+        min-width: calc(100vw - 2rem);
+    }
 }
 
 .dot {
