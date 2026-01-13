@@ -50,14 +50,11 @@ import ThreeScene from "@/modules/ThreeScene/ThreeScene.astro"
 
 <script>
     function initSmoothScroll() {
-        // Verificar si se deben deshabilitar los efectos
+        // Verificar si es Firefox
         const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-        // Verificar primero sessionStorage, luego localStorage
-        const disableEffects = sessionStorage.getItem('disable-3d-effects-session') === 'true' || 
-                              localStorage.getItem('disable-3d-effects') === 'true'
         
-        // Si los efectos están deshabilitados, usar scroll normal del navegador
-        if (!isFirefox && disableEffects) {
+        // Si no es Firefox, usar scroll normal del navegador (sin efectos)
+        if (!isFirefox) {
             // Solo manejar los enlaces de navegación
             document.querySelectorAll('a[href^="#"]').forEach(link => {
                 link.addEventListener('click', (e) => {
@@ -144,7 +141,4 @@ import ThreeScene from "@/modules/ThreeScene/ThreeScene.astro"
     
     // Reinicializar en transiciones de Astro
     document.addEventListener('astro:page-load', initSmoothScroll)
-    
-    // Escuchar evento para deshabilitar efectos
-    window.addEventListener('disable-3d-effects', initSmoothScroll)
 </script>

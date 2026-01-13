@@ -1,36 +1,15 @@
 function initExperienceScroll() {
-  // Verificar si se deben deshabilitar los efectos
+  // Verificar si es Firefox
   const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-  // Verificar primero sessionStorage, luego localStorage
-  const disableEffects = sessionStorage.getItem('disable-3d-effects-session') === 'true' || 
-                        localStorage.getItem('disable-3d-effects') === 'true'
   
   const timeline = document.getElementById('timeline')
   const timelineWrapper = document.querySelector('.timeline-wrapper')
   
   if (!timeline || !timelineWrapper) return
   
-  // Si no es Firefox y los efectos están deshabilitados, usar modo grid
-  if (!isFirefox && disableEffects) {
-    timelineWrapper.classList.add('effects-disabled')
-    return
-  }
-  
-  // Si no es Firefox, usar scroll horizontal nativo mejorado
+  // Si no es Firefox, desactivar todos los efectos y usar modo grid estático
   if (!isFirefox) {
-    // Asegurar que el timeline tenga las propiedades correctas para scroll nativo
-    timeline.style.scrollBehavior = 'smooth'
-    
-    // Mejorar el scroll horizontal para trackpads y mouse
-    timeline.addEventListener('wheel', (e) => {
-      // Detectar scroll horizontal (deltaX) o scroll vertical con shift
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey) {
-        // Es scroll horizontal, permitirlo
-        timeline.scrollLeft += e.deltaX || e.deltaY
-        e.stopPropagation() // Evitar que el scroll suave lo intercepte
-      }
-    }, { passive: false })
-    
+    timelineWrapper.classList.add('effects-disabled')
     return
   }
 
@@ -92,6 +71,3 @@ if (document.readyState === 'loading') {
 
 // Reinicializar en transiciones de Astro
 document.addEventListener('astro:page-load', initExperienceScroll)
-
-// Escuchar evento para deshabilitar efectos
-window.addEventListener('disable-3d-effects', initExperienceScroll)

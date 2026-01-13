@@ -5,14 +5,11 @@
 
 <script>
   async function initThreeScene() {
-    // Verificar si se deben deshabilitar los efectos 3D
+    // Verificar si es Firefox
     const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-    // Verificar primero sessionStorage, luego localStorage
-    const disableEffects = sessionStorage.getItem('disable-3d-effects-session') === 'true' || 
-                          localStorage.getItem('disable-3d-effects') === 'true'
     
-    // Si no es Firefox y el usuario decidió continuar sin efectos, ocultar el contenedor
-    if (!isFirefox && disableEffects) {
+    // Si no es Firefox, ocultar el contenedor 3D
+    if (!isFirefox) {
       const container = document.getElementById('three-container')
       if (container) {
         container.style.display = 'none'
@@ -147,11 +144,6 @@
 
   // Reinicializar en transiciones de Astro
   document.addEventListener('astro:page-load', initThreeScene)
-  
-  // Escuchar evento para deshabilitar efectos
-  window.addEventListener('disable-3d-effects', () => {
-    initThreeScene()
-  })
 </script>
 
 <style>

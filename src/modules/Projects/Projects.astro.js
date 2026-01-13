@@ -1,15 +1,12 @@
 function initProjectsScroll() {
-  // Verificar si se deben deshabilitar los efectos
+  // Verificar si es Firefox
   const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-  // Verificar primero sessionStorage, luego localStorage
-  const disableEffects = sessionStorage.getItem('disable-3d-effects-session') === 'true' || 
-                        localStorage.getItem('disable-3d-effects') === 'true'
   
   const cards = [...document.querySelectorAll('.card')]
   if (cards.length === 0) return
   
-  // Si no es Firefox y los efectos están deshabilitados, mostrar cards estáticas
-  if (!isFirefox && disableEffects) {
+  // Si no es Firefox, desactivar todos los efectos y mostrar cards estáticas
+  if (!isFirefox) {
     const section = document.querySelector('section.relative')
     if (section) {
       section.style.height = 'auto'
@@ -48,7 +45,7 @@ function initProjectsScroll() {
     return
   }
   
-  // Comportamiento normal con scroll
+  // Comportamiento con efectos solo para Firefox
   const vh = window.innerHeight
   const total = cards.length
 
@@ -81,6 +78,3 @@ if (document.readyState === 'loading') {
 
 // Reinicializar en transiciones de Astro
 document.addEventListener('astro:page-load', initProjectsScroll)
-
-// Escuchar evento para deshabilitar efectos
-window.addEventListener('disable-3d-effects', initProjectsScroll)
