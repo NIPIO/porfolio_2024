@@ -23,33 +23,51 @@ function initExperienceScroll() {
       const wrapperRect = timelineWrapper.getBoundingClientRect()
       const isInWrapperZone = 
           e.clientY >= wrapperRect.top && 
-          e.clientY <= wrapperRect.bottom
+          e.clientY <= wrapperRect.bottom &&
+          e.clientX >= wrapperRect.left &&
+          e.clientX <= wrapperRect.right
 
       if (!isInWrapperZone) return
 
       const maxScrollLeft =
           timeline.scrollWidth - timeline.clientWidth
-      const isAtStart = timeline.scrollLeft <= 0
-      const isAtEnd = timeline.scrollLeft >= maxScrollLeft - 1
+      const currentScrollLeft = timeline.scrollLeft
+      const isAtStart = currentScrollLeft <= 1
+      const isAtEnd = currentScrollLeft >= maxScrollLeft - 1
 
-      const scrollingRight = e.deltaY > 0
-      const scrollingLeft = e.deltaY < 0
+      const scrollingDown = e.deltaY > 0
+      const scrollingUp = e.deltaY < 0
 
-      // 🔓 Si ya no hay más scroll horizontal, liberar el scroll vertical
+      // 🔓 Si ya no hay más scroll horizontal en la dirección del scroll, 
+      // NO interceptar y permitir que el scroll vertical nativo continúe
       if (
-          (isAtEnd && scrollingRight) ||
-          (isAtStart && scrollingLeft)
+          (isAtEnd && scrollingDown) ||
+          (isAtStart && scrollingUp)
       ) {
           timeline.classList.remove('no-snap')
+          // No prevenir el evento - el scroll vertical nativo funcionará automáticamente
           return
       }
 
-      // 🔒 Mientras haya scroll horizontal, lo interceptamos
+      // Intentar hacer scroll horizontal
+      const newScrollLeft = currentScrollLeft + (e.deltaY * 0.8)
+      const wouldExceedEnd = newScrollLeft > maxScrollLeft
+      const wouldExceedStart = newScrollLeft < 0
+
+      // Si el scroll intentaría exceder los límites, permitir scroll vertical
+      if ((wouldExceedEnd && scrollingDown) || (wouldExceedStart && scrollingUp)) {
+          timeline.classList.remove('no-snap')
+          // No interceptar - permitir scroll vertical nativo
+          return
+      }
+
+      // 🔒 Mientras haya scroll horizontal disponible, lo interceptamos
       e.preventDefault()
       e.stopPropagation()
+      e.stopImmediatePropagation()
 
       timeline.classList.add('no-snap')
-      timeline.scrollLeft += e.deltaY * 0.8
+      timeline.scrollLeft = newScrollLeft
 
       clearTimeout(snapTimeout)
       snapTimeout = setTimeout(() => {

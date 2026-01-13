@@ -6,6 +6,8 @@ import Tailwind from "@/components/icons/Tailwind.astro"
 import Link from "@/components/icons/Link.astro"
 import LinkButton from "@/modules/LinkButton/LinkButton.astro"
 
+const { t } = Astro.locals
+
 const TAGS = {
   QUASAR: {
     name: "Quasar",
@@ -27,43 +29,33 @@ const TAGS = {
   },
 }
 
+const PROJECTS_DATA = [
+  {
+    link: "https://chatquasar-36f6f.web.app/",
+    github: "https://github.com/NIPIO/Chat-Quasar-Firebase",
+    image: "/projects/Chat.PNG",
+    tags: [TAGS.QUASAR, TAGS.VUE, TAGS.TAILWIND],
+  },
+  {
+    link: "https://weather-app-with-vue-and-tailwind.vercel.app/",
+    github: "https://github.com/NIPIO/Weather-App-With-Vue-And-Tailwind",
+    image: "/projects/Weather.png",
+    tags: [TAGS.TAILWIND, TAGS.VUE],
+  },
+]
+
 const PROJECTS = [
-  {
-    title: "ChatQuasar - Chat en vivo!",
-    description:
-      "Un chat desarrollado con lo último de Vue (Quasar). Multiples usuarios pueden conversar en el mismo chat. Logueo y autenticación con Gmail y Firebase. Creado desde cero con Quasar.",
-    link: "https://chatquasar-36f6f.web.app/",
-    github: "https://github.com/NIPIO/Chat-Quasar-Firebase",
-    image: "/projects/Chat.PNG",
-    tags: [TAGS.QUASAR, TAGS.VUE, TAGS.TAILWIND],
-  },
-  {
-    title: "App de Clima",
-    description:
-      "Aplicación conectada a dos Apis (una de ciudades, otra de clima) para consultar el clima actual, diario y semanal. Desarrollada con historial de búsqueda. Creada desde cero con Vue y Tailwind CSS.",
-    link: "https://weather-app-with-vue-and-tailwind.vercel.app/",
-    github: "https://github.com/NIPIO/Weather-App-With-Vue-And-Tailwind",
-    image: "/projects/Weather.png",
-    tags: [TAGS.TAILWIND, TAGS.VUE],
-  },
-  {
-    title: "ChatQuasar - Chat en vivo!",
-    description:
-      "Un chat desarrollado con lo último de Vue (Quasar). Multiples usuarios pueden conversar en el mismo chat. Logueo y autenticación con Gmail y Firebase. Creado desde cero con Quasar.",
-    link: "https://chatquasar-36f6f.web.app/",
-    github: "https://github.com/NIPIO/Chat-Quasar-Firebase",
-    image: "/projects/Chat.PNG",
-    tags: [TAGS.QUASAR, TAGS.VUE, TAGS.TAILWIND],
-  },
-  {
-    title: "App de Clima",
-    description:
-      "Aplicación conectada a dos Apis (una de ciudades, otra de clima) para consultar el clima actual, diario y semanal. Desarrollada con historial de búsqueda. Creada desde cero con Vue y Tailwind CSS.",
-    link: "https://weather-app-with-vue-and-tailwind.vercel.app/",
-    github: "https://github.com/NIPIO/Weather-App-With-Vue-And-Tailwind",
-    image: "/projects/Weather.png",
-    tags: [TAGS.TAILWIND, TAGS.VUE],
-  },
+  ...PROJECTS_DATA.map((project, i) => ({
+    ...project,
+    title: t.projects.items[i]?.title || '',
+    description: t.projects.items[i]?.description || '',
+  })),
+  // Duplicar para el efecto de scroll
+  ...PROJECTS_DATA.map((project, i) => ({
+    ...project,
+    title: t.projects.items[i]?.title || '',
+    description: t.projects.items[i]?.description || '',
+  })),
 ]
 ---
 
@@ -124,7 +116,7 @@ const PROJECTS = [
                   {project.link && (
                     <LinkButton href={project.link}>
                       <Link class="size-4" />
-                      Preview
+                      {t.projects.preview}
                     </LinkButton>
                   )}
                 </footer>

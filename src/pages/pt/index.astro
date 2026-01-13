@@ -1,0 +1,153 @@
+---
+import Layout from "@/layouts/Layout.astro"
+
+import AboutMe from "@/modules/AboutMe/AboutMe.astro"
+import Briefcase from "@/components/icons/Briefcase.astro"
+import CodeIcon from "@/components/icons/Code.astro"
+import Experience from "@/modules/Experience/Experience.astro"
+import ProfileCheck from "@/components/icons/ProfileCheck.astro"
+import Projects from "@/modules/Projects/Projects.astro"
+import SectionContainer from "@/modules/Section/SectionContainer.astro"
+import Personal from "@/modules/Personal/Personal.astro"
+import ThreeScene from "@/modules/ThreeScene/ThreeScene.astro"
+
+import { getI18n } from "@/i18n"
+import { getLangFromUrl } from "@/utils/lang"
+
+const lang = getLangFromUrl(Astro.url)
+Astro.locals.lang = lang
+Astro.locals.t = getI18n(lang)
+const { t } = Astro.locals
+---
+
+<Layout title={t.seo.title}
+        description={t.seo.description}>
+    <main class="px-4">
+        <SectionContainer class="min-h-screen flex items-center">
+            <div class="w-full flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
+                <Personal/>
+                <div class="w-full md:w-1/2 max-w-md">
+                    <ThreeScene/>
+                </div>
+            </div>
+        </SectionContainer>
+        <div class="space-y-24">
+            <SectionContainer id="experiencia">
+
+                <Experience/>
+            </SectionContainer>
+
+            <SectionContainer id="proyectos">
+                <h2 class="flex items-center mb-2 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white">
+                    <CodeIcon class="size-7"/>
+                    {t.projects.title}
+                </h2>
+                <Projects />
+            </SectionContainer>
+
+            <SectionContainer id="sobre-mi">
+                <h2 class="flex items-center mb-6 text-3xl font-semibold gap-x-8 text-black/80 dark:text-white">
+                    <ProfileCheck class="size-8"/>
+                    {t.aboutMe.title}
+                </h2>
+                <AboutMe/>
+            </SectionContainer>
+        </div>
+    </main>
+</Layout>
+
+<script>
+    
+    function initSmoothScroll() {
+        // Verificar si es Firefox
+        const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+        
+        // Si no es Firefox, usar scroll normal del navegador (sin efectos)
+        if (!isFirefox) {
+            // Solo manejar los enlaces de navegación
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const id = link.getAttribute('href')?.slice(1)
+                    const target = document.getElementById(id)
+                    if (!target) return
+
+                    e.preventDefault()
+
+                    // Ajustar el scroll para dejar espacio para el header fijo (aprox 80px)
+                    const headerOffset = 80
+                    window.scrollTo({
+                        top: target.offsetTop - headerOffset,
+                        behavior: 'smooth'
+                    })
+                })
+            })
+            return
+        }
+        
+        // Scroll suave personalizado solo si los efectos están habilitados
+        let currentScroll = window.scrollY
+        let targetScroll = currentScroll
+        const ease = 0.08
+        let animationFrameId = null
+
+        function smoothScroll() {
+            currentScroll += (targetScroll - currentScroll) * ease
+            window.scrollTo(0, currentScroll)
+            animationFrameId = requestAnimationFrame(smoothScroll)
+        }
+
+        const handleWheel = (e) => {
+            // No interceptar si el usuario está haciendo scroll en el timeline
+            const timeline = document.getElementById('timeline')
+            const timelineWrapper = document.querySelector('.timeline-wrapper')
+            
+            if (timeline && timelineWrapper) {
+                const timelineRect = timelineWrapper.getBoundingClientRect()
+                const isInTimeline = 
+                    e.clientY >= timelineRect.top && 
+                    e.clientY <= timelineRect.bottom &&
+                    e.clientX >= timelineRect.left &&
+                    e.clientX <= timelineRect.right
+                
+                // Si hay scroll horizontal en el timeline, no interceptar
+                if (isInTimeline && (Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey)) {
+                    return
+                }
+            }
+            
+            e.preventDefault()
+            targetScroll += e.deltaY * 0.8
+            targetScroll = Math.max(
+                0,
+                Math.min(targetScroll, document.body.scrollHeight - window.innerHeight)
+            )
+        }
+
+        window.addEventListener('wheel', handleWheel, {passive: false})
+        smoothScroll()
+
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const id = link.getAttribute('href')?.slice(1)
+                const target = document.getElementById(id)
+                if (!target) return
+
+                e.preventDefault()
+
+                // Ajustar el scroll para dejar espacio para el header fijo (aprox 80px)
+                const headerOffset = 80
+                targetScroll = target.offsetTop - headerOffset
+            })
+        })
+    }
+    
+    // Inicializar cuando el DOM esté listo
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSmoothScroll)
+    } else {
+        initSmoothScroll()
+    }
+    
+    // Reinicializar en transiciones de Astro
+    document.addEventListener('astro:page-load', initSmoothScroll)
+</script>

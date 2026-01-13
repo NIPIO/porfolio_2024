@@ -5,6 +5,7 @@ import Header from "../modules/Header/Header.astro"
 import Footer from "../modules/Footer/Footer.astro"
 import BrowserModal from "../modules/BrowserModal/BrowserModal.astro"
 import {ViewTransitions} from "astro:transitions"
+import { getLangFromUrl } from "@/utils/lang"
 
 interface Props {
     title: string
@@ -12,10 +13,11 @@ interface Props {
 }
 
 const {description, title} = Astro.props
+const lang = getLangFromUrl(Astro.url)
 ---
 
 <!doctype html>
-<html lang="es" class="dark">
+<html lang={lang} class="dark">
 <head>
     <meta charset="UTF-8"/>
     <meta name="description" content={description}/>
