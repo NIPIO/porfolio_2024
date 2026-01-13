@@ -5,6 +5,7 @@ import Vue from "@/components/icons/Vue.astro"
 import Tailwind from "@/components/icons/Tailwind.astro"
 import Link from "@/components/icons/Link.astro"
 import LinkButton from "@/modules/LinkButton/LinkButton.astro"
+import Image from "astro/components/Image.astro"
 
 const TAGS = {
   QUASAR: {
@@ -79,9 +80,11 @@ const PROJECTS = [
               <!-- Imagen -->
               <div class="w-full md:w-1/2 flex items-center justify-center">
                 <div class="relative overflow-hidden rounded-xl shadow-lg">
-                  <img
+                  <Image
                     src={project.image}
                     alt={project.title}
+                    width={1000}
+                    height={1000}
                     loading="lazy"
                     class="object-cover w-full h-full max-h-[320px] md:max-h-full"
                   />
