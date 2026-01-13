@@ -1,50 +1,73 @@
-const timeline = document.getElementById('timeline')
-const timelineWrapper = document.querySelector('.timeline-wrapper')
-let snapTimeout
+function initExperienceScroll() {
+  // Verificar si es Firefox
+  const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+  
+  const timeline = document.getElementById('timeline')
+  const timelineWrapper = document.querySelector('.timeline-wrapper')
+  
+  if (!timeline || !timelineWrapper) return
+  
+  // Si no es Firefox, desactivar todos los efectos y usar modo grid estático
+  if (!isFirefox) {
+    timelineWrapper.classList.add('effects-disabled')
+    return
+  }
 
-if (timeline && timelineWrapper) {
-    const handleWheel = (e) => {
-        if (window.innerWidth < 768) return
+  // Comportamiento completo solo para Firefox
+  let snapTimeout
 
-        // Verificar si el scroll está dentro de la zona del timeline-wrapper
-        const wrapperRect = timelineWrapper.getBoundingClientRect()
-        const isInWrapperZone = 
-            e.clientY >= wrapperRect.top && 
-            e.clientY <= wrapperRect.bottom
+  const handleWheel = (e) => {
+      if (window.innerWidth < 768) return
 
-        if (!isInWrapperZone) return
+      // Verificar si el scroll está dentro de la zona del timeline-wrapper
+      const wrapperRect = timelineWrapper.getBoundingClientRect()
+      const isInWrapperZone = 
+          e.clientY >= wrapperRect.top && 
+          e.clientY <= wrapperRect.bottom
 
-        const maxScrollLeft =
-            timeline.scrollWidth - timeline.clientWidth
-        const isAtStart = timeline.scrollLeft <= 0
-        const isAtEnd = timeline.scrollLeft >= maxScrollLeft - 1
+      if (!isInWrapperZone) return
 
-        const scrollingRight = e.deltaY > 0
-        const scrollingLeft = e.deltaY < 0
+      const maxScrollLeft =
+          timeline.scrollWidth - timeline.clientWidth
+      const isAtStart = timeline.scrollLeft <= 0
+      const isAtEnd = timeline.scrollLeft >= maxScrollLeft - 1
 
-        // 🔓 Si ya no hay más scroll horizontal, liberar el scroll vertical
-        if (
-            (isAtEnd && scrollingRight) ||
-            (isAtStart && scrollingLeft)
-        ) {
-            timeline.classList.remove('no-snap')
-            return
-        }
+      const scrollingRight = e.deltaY > 0
+      const scrollingLeft = e.deltaY < 0
 
-        // 🔒 Mientras haya scroll horizontal, lo interceptamos
-        e.preventDefault()
-        e.stopPropagation()
+      // 🔓 Si ya no hay más scroll horizontal, liberar el scroll vertical
+      if (
+          (isAtEnd && scrollingRight) ||
+          (isAtStart && scrollingLeft)
+      ) {
+          timeline.classList.remove('no-snap')
+          return
+      }
 
-        timeline.classList.add('no-snap')
-        timeline.scrollLeft += e.deltaY * 0.8
+      // 🔒 Mientras haya scroll horizontal, lo interceptamos
+      e.preventDefault()
+      e.stopPropagation()
 
-        clearTimeout(snapTimeout)
-        snapTimeout = setTimeout(() => {
-            timeline.classList.remove('no-snap')
-        }, 150)
-    }
+      timeline.classList.add('no-snap')
+      timeline.scrollLeft += e.deltaY * 0.8
 
-    // Escuchar el evento wheel en toda la sección y en el timeline
-    timelineWrapper.addEventListener('wheel', handleWheel, {passive: false})
-    timeline.addEventListener('wheel', handleWheel, {passive: false})
+      clearTimeout(snapTimeout)
+      snapTimeout = setTimeout(() => {
+          timeline.classList.remove('no-snap')
+      }, 150)
+  }
+
+  // Escuchar el evento wheel solo en Firefox
+  timelineWrapper.addEventListener('wheel', handleWheel, {passive: false})
+  timeline.addEventListener('wheel', handleWheel, {passive: false})
 }
+
+// Inicializar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initExperienceScroll)
+} else {
+  initExperienceScroll()
+}
+
+// Reinicializar en transiciones de Astro
+document.addEventListener('astro:page-load', initExperienceScroll)
