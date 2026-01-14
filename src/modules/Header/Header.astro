@@ -1,16 +1,9 @@
 ---
 import ThemeToggle from "@/modules/ThemeToggle/ThemeToggle.astro"
+import LanguageToggle from "@/modules/LanguageToggle/LanguageToggle.astro"
 
-const navItems = [
-  { title: "Experiencia", section: "experiencia", url: "#experiencia" },
-  { title: "Proyectos", section: "proyectos", url: "#proyectos" },
-  { title: "Sobre mí", section: "sobre-mi", url: "#sobre-mi" },
-  {
-    title: "Curriculum",
-    url: "/CV_NICO_PIOVANO_2024.pdf",
-    download: true
-  }
-]
+const { t } = Astro.locals
+const navItems = t.header
 ---
 <header class="fixed top-0 z-20 w-full flex justify-center mt-2">
     <!-- Desktop -->
@@ -32,6 +25,7 @@ const navItems = [
                 </a>
             ))
         }
+        <LanguageToggle />
         <ThemeToggle />
     </nav>
 

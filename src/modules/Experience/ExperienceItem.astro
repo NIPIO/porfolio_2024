@@ -9,10 +9,11 @@ interface Props {
         aprendizajes?: string
     }
     techUrls: Record<string, string>
+    learningLabel?: string
 }
 
 import "./ExperienceItem.astro.css"
-const {experience, techUrls} = Astro.props
+const {experience, techUrls, learningLabel = "Aprendizajes:"} = Astro.props
 ---
 
 <div class="card">
@@ -49,7 +50,7 @@ const {experience, techUrls} = Astro.props
             <div class="learning">
                 <span class="learning-icon">💡</span>
                 <p>
-                    <strong class="text-green-800 dark:text-green-600">Aprendizajes:</strong> {experience.aprendizajes}
+                    <strong class="text-green-800 dark:text-green-600">{learningLabel}</strong> {experience.aprendizajes}
                 </p>
             </div>
     )}
