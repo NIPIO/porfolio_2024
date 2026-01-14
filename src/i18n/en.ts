@@ -68,20 +68,24 @@ export default {
     title: "About me 😉",
     paragraphs: [
       {
-        strong: "I started my programming career in 2016",
-        text: "developing with patience, confidence and a resolute approach to the challenges presented."
+        before: "I started my programming career in 2016 ",
+        strong: "developing with patience, confidence, and a resolute approach",
+        after: " to the challenges presented."
       },
       {
+        before: "I quickly adapt to new technologies and projects, and I always seek ",
         strong: "pragmatic solutions",
-        text: "I quickly adapt to new technologies and projects, and always seek pragmatic solutions that allow effective progress, even in challenging environments."
+        after: " that allow effective progress, even in challenging environments."
       },
       {
-        strong: "social skills and adaptability",
-        text: "Additionally, I have traveled and lived in several Latin American countries while working in hostels, which strengthened my social skills, adaptability, and ability to collaborate with diverse teams."
+        before: "Additionally, I have traveled and lived in several Latin American countries while working in hostels, which strengthened my ",
+        strong: "social skills, adaptability, and ability to collaborate",
+        after: " with diverse teams."
       },
       {
-        strong: "freelance field",
-        text: "My current goals include expanding into the freelance field and applying my adaptable, results-driven approach to generate concrete outcomes in each project."
+        before: "My current goals include expanding into the freelance field and applying my ",
+        strong: "adaptable and results-driven approach",
+        after: " to generate concrete outcomes in each project."
       }
     ]
   },

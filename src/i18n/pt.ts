@@ -67,23 +67,28 @@ export default {
     title: "Sobre mim 😉",
     paragraphs: [
       {
-        strong: "Iniciei minha carreira em programação em 2016",
-        text: "desenvolvendo com paciência, confiança e de maneira resolutiva os distintos desafios propostos."
+        before: "Iniciei minha carreira em programação em 2016 ",
+        strong: "desenvolvendo com paciência, confiança e uma abordagem resolutiva",
+        after: " diante dos desafios propostos."
       },
       {
+        before: "Adapto-me rapidamente a novas tecnologias e projetos e sempre busco ",
         strong: "soluções pragmáticas",
-        text: "Adapto-me rapidamente a novas tecnologias e projetos, e sempre busco soluções pragmáticas que permitam avançar de maneira efetiva, inclusive em ambientes desafiadores."
+        after: " que permitam avançar de forma eficaz, inclusive em ambientes desafiadores."
       },
       {
-        strong: "habilidades sociais, a adaptabilidade",
-        text: "Além disso, viajei e vivi em vários países da América Latina enquanto trabalhava em hostels, o que fortaleceu minhas habilidades sociais, a adaptabilidade e a capacidade de colaborar com equipes diversas."
+        before: "Além disso, viajei e vivi em vários países da América Latina enquanto trabalhava em hostels, o que fortaleceu minhas ",
+        strong: "habilidades sociais, adaptabilidade e capacidade de colaborar",
+        after: " com equipes diversas."
       },
       {
-        strong: "âmbito freelance",
-        text: "Minhas metas atuais incluem expandir no âmbito freelance e aplicar minha abordagem resolutiva e adaptável para gerar resultados concretos em cada projeto."
+        before: "Meus objetivos atuais incluem expandir no âmbito freelance e aplicar minha ",
+        strong: "abordagem resolutiva e adaptável",
+        after: " para gerar resultados concretos em cada projeto."
       }
     ]
   },
+  
   footer: {
     developed: "Desenvolvido com",
     downloadCV: "Baixar CV 2026"
