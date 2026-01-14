@@ -1,0 +1,69 @@
+---
+import ChatMessage from "./ChatMessage.astro"
+---
+
+<section class="chat-card">
+  <header class="chat-header">
+    <h2>Asistente profesional</h2>
+    <p>Elegí una pregunta para continuar</p>
+  </header>
+
+  <div class="chat-body" id="chat-body">
+    <ChatMessage
+      role="assistant"
+      content="Hola 👋 Soy Nico. ¿Qué te gustaría saber?"
+    />
+
+    <div class="badges">
+      <button class="badge">¿Cuál es tu experiencia?</button>
+      <button class="badge">¿En qué tecnologías trabajás?</button>
+      <button class="badge">¿Cómo es tu forma de trabajo?</button>
+      <button class="badge">¿Estás disponible para proyectos?</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const body = document.getElementById("chat-body")
+
+  
+  body.addEventListener("click", async (e) => {
+    if (!e.target.classList.contains("badge")) return
+
+    // 🔥 limpiar badges anteriores
+    body.querySelectorAll(".badges").forEach(el => el.remove())
+
+    const message = e.target.textContent
+
+    body.insertAdjacentHTML(
+      "beforeend",
+      `<div class="msg user">${message}</div>`
+    )
+
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+    })
+
+    const data = await res.json()
+
+    body.insertAdjacentHTML(
+      "beforeend",
+      `<div class="msg assistant">${data.reply}</div>`
+    )
+
+    if (data.followUps?.length) {
+      const badges = data.followUps
+        .map(q => `<button class="badge">${q}</button>`)
+        .join("")
+
+      body.insertAdjacentHTML(
+        "beforeend",
+        `<div class="badges">${badges}</div>`
+      )
+    }
+
+    body.scrollTop = body.scrollHeight
+  })
+</script>
