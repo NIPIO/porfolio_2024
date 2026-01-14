@@ -1,3 +1,4 @@
+/* ===== CHAT CARD ===== */
 .chat-card {
   width: 100%;
   max-width: 520px;
@@ -12,11 +13,12 @@
 }
 
 :global(html.dark) .chat-card {
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(15, 23, 42, 0.95);
   border: 1px solid rgba(34, 197, 94, 0.35);
   box-shadow: 0 20px 40px rgba(0,0,0,.4);
 }
 
+/* ===== HEADER ===== */
 .chat-header {
   padding: 1.2rem;
   border-bottom: 1px solid rgba(34,197,94,.2);
@@ -42,6 +44,7 @@
   opacity: .75;
 }
 
+/* ===== BODY ===== */
 .chat-body {
   flex: 1;
   padding: 1rem;
@@ -51,6 +54,7 @@
   gap: .75rem;
 }
 
+/* ===== MESSAGES ===== */
 .msg {
   max-width: 85%;
   padding: .75rem 1rem;
@@ -79,6 +83,48 @@
   background: rgba(255,255,255,.08);
 }
 
+/* ===== BADGES ===== */
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.badge {
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(34, 197, 94, 0.15);
+  color: #022c16;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+:global(html.dark) .badge {
+  background: rgba(34, 197, 94, 0.15);
+  color: white;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.badge:hover {
+  background: rgba(34, 197, 94, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.2);
+}
+
+:global(html.dark) .badge:hover {
+  background: rgba(34, 197, 94, 0.25);
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+}
+
+.badge:active {
+  transform: translateY(0);
+}
+
+/* ===== INPUT ===== */
 .chat-input {
   display: flex;
   gap: .5rem;
@@ -114,10 +160,16 @@
   border-radius: 12px;
   padding: 0 .9rem;
   font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.chat-input button:hover {
+  background: #16a34a;
 }
 
 /* ===== WIDGET ===== */
-
 #chat-widget {
   position: fixed;
   bottom: 1.5rem;
@@ -135,11 +187,24 @@
   font-size: 1.4rem;
   box-shadow: 0 10px 25px rgba(0,0,0,.35);
   transition: transform .2s ease, box-shadow .2s ease;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:global(html.dark) #chat-toggle {
+  box-shadow: 0 10px 25px rgba(0,0,0,.5);
 }
 
 #chat-toggle:hover {
   transform: scale(1.05);
   box-shadow: 0 15px 35px rgba(0,0,0,.45);
+}
+
+:global(html.dark) #chat-toggle:hover {
+  box-shadow: 0 15px 35px rgba(0,0,0,.6);
 }
 
 /* Panel del chat */
@@ -162,4 +227,17 @@
 #chat-panel.open {
   opacity: 1;
   transform: scale(1) translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  #chat-widget {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  #chat-panel {
+    width: calc(100vw - 2rem);
+    max-width: 360px;
+  }
 }

@@ -10,52 +10,64 @@
 export const INTENT_KEYWORDS: Record<Intent, string[]> = {
   greeting: ["hola", "buenas", "buen día", "buen dia", "hey", "que tal"],
   stack: [
-    // general
-    "stack", "tecnologias", "tecnologia", "herramientas", "skills", "conocimientos", 
-    // frontend
-    "frontend", "front", "ui", "ux", "javascript", "typescript", "vue", "react", "css", "html", "tailwind", 
-    // backend
-    "backend", "back", "api", "servidor", "laravel", "php", "node", "base de datos", "mysql", "postgres",
-
-    // infra / otros
-    "docker", "containers", "git", "github", "devops"
+   "frontend", "front",
+"backend", "back",
+"vue", "react",
+"laravel", "php",
+"api", "mysql", "docker",
+"tailwind", "typescript"
   ],
 
   experience: [
-    // general
-    "experiencia", "trayectoria", "carrera", "perfil", 
-    // tiempo
-    "años", "tiempo", "seniority", 
-    // trabajos
-    "trabajos", "laburos", "laburo", "empleos", "empresas", "trabajado", "trabajaste", "historial", "background"
+   "experiencia", "trayectoria", "carrera",
+"años", "tiempo",
+"trabajos", "laburos", "laburo",
+"empleos", "empresas",
+"trabajado", "trabajaste", "historial"
+
   ],
 
   projects: [
-    "proyectos", "portfolio", "portafolio", "casos", "casos de exito", "clientes", "apps", "productos", "sistemas", "desarrollos"
+    "proyectos",
+    "proyecto",
+    "trabajaste",
+    "trabajado",
+    "tipo de proyectos",
+    "portfolio",
+    "portafolio",
+    "casos",
+    "clientes",
+    "sistemas",
+    "apps",
+    "aplicaciones"
   ],
+  
   way_of_working: [
-    "trabajo",
-    "trabajar",
-    "metodologia",
-    "forma",
-    "manera",
-    "proceso",
-    "equipo",
-    "team",
-    "scrum",
-    "agil",
-    "remoto",
-    "comunicacion",
-    "organizacion",
-    "autonomia",
-    "definido",
-    "definida",
-    "exploratorio",
-    "exploratoria"
+ "trabajo",
+"metodologia",
+"proceso",
+"equipo",
+"team",
+"scrum",
+"agil",
+"remoto",
+"comunicacion",
+"organizacion",
+"autonomia"
+
   ],
 
   availability: [
-    "disponibilidad", "freelance", "contractor", "contrato", "full time", "part time", "horario", "jornada", "proyecto", "colaborar", "trabajar conmigo"
+  "disponibilidad",
+"freelance",
+"contractor",
+"contrato",
+"full time",
+"part time",
+"horario",
+"jornada",
+"colaborar"
+
   ],
 
   unknown: []
