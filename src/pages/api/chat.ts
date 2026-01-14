@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro"
-import { getStaticReply } from "@/data/chat/engine"
+import { getStaticReply } from "@/chat/engine"
 
 export const POST: APIRoute = async ({ request }) => {
   const { message } = await request.json()
