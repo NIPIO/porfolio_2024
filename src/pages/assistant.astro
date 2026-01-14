@@ -1,0 +1,15 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import ChatUI from "@/modules/Chat/ChatUi.astro"
+
+const { t } = Astro.locals
+---
+
+<Layout
+  title="Asistente profesional | Nico Piovano"
+  description="Chat profesional para reclutadores"
+>
+  <main class="min-h-screen flex items-center justify-center px-4">
+    <ChatUI />
+  </main>
+</Layout>

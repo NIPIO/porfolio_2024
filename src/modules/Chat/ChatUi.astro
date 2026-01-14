@@ -1,0 +1,64 @@
+---
+import ChatMessage from "./ChatMessage.astro"
+import "./chat.css"
+---
+
+<section class="chat-card">
+  <header class="chat-header">
+    <h2>Asistente profesional</h2>
+    <p>Preguntame sobre mi experiencia, stack o forma de trabajo</p>
+  </header>
+
+  <div class="chat-body" id="chat-body">
+    <ChatMessage
+      role="assistant"
+      content="Hola 👋 Soy Nico. Podés preguntarme sobre mi experiencia profesional, tecnologías o proyectos."
+    />
+  </div>
+
+  <form class="chat-input" id="chat-form">
+    <input
+      type="text"
+      id="chat-text"
+      placeholder="Escribí tu pregunta…"
+      autocomplete="off"
+      required
+    />
+    <button type="submit">Enviar</button>
+  </form>
+</section>
+
+<script>
+  const form = document.getElementById("chat-form")
+  const input = document.getElementById("chat-text")
+  const body = document.getElementById("chat-body")
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault()
+    const message = input.value.trim()
+    if (!message) return
+
+    body.insertAdjacentHTML(
+      "beforeend",
+      `<div class="msg user">${message}</div>`
+    )
+
+    input.value = ""
+    body.scrollTop = body.scrollHeight
+
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+    })
+
+    const data = await res.json()
+
+    body.insertAdjacentHTML(
+      "beforeend",
+      `<div class="msg assistant">${data.reply}</div>`
+    )
+
+    body.scrollTop = body.scrollHeight
+  })
+</script>
