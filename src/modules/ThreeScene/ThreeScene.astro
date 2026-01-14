@@ -61,11 +61,6 @@
     controls.minDistance = 3 // Distancia mínima de la cámara
     controls.maxDistance = 3 // Distancia máxima de la cámara (mismo valor = sin zoom)
     
-    // Prevenir scroll en el contenedor
-    container.addEventListener('wheel', (e) => {
-      e.preventDefault()
-    }, { passive: false })
-
     // Geometría - TorusKnot (nudo toroidal)
     const geometry = new THREE.TorusGeometry(1, 0.5, 500, 100)
     
