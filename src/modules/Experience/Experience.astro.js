@@ -8,10 +8,10 @@ function initExperienceScroll() {
   if (!timeline || !timelineWrapper) return
   
   // Si no es Firefox, desactivar todos los efectos y usar modo grid estático
-  if (!isFirefox) {
-    timelineWrapper.classList.add('effects-disabled')
-    return
-  }
+  // if (!isFirefox) {
+  //   timelineWrapper.classList.add('effects-disabled')
+  //   return
+  // }
 
   // Comportamiento completo solo para Firefox
   let snapTimeout
