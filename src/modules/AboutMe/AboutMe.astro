@@ -10,25 +10,15 @@ const { t } = Astro.locals
         id="aboutMe">
     <!-- Texto -->
     <div class="text-section order-2 md:order-1 flex-1 [&>p]:mb-4">
-        <p>
-            <strong>{t.aboutMe.paragraphs[0].strong}</strong>, {t.aboutMe.paragraphs[0].text}
-            paciencia, confianza y de manera resolutiva los distintos desafios propuestos. </p>
-
-        <p>
-            {t.aboutMe.paragraphs[1].text}
-            <strong>{t.aboutMe.paragraphs[1].strong}</strong> {t.aboutMe.paragraphs[1].text}
-        </p>
-
-        <p>
-            {t.aboutMe.paragraphs[2].text}
-            <strong>{t.aboutMe.paragraphs[2].strong}</strong> {t.aboutMe.paragraphs[2].text}
-        </p>
-
-        <p>
-            {t.aboutMe.paragraphs[3].text}
-            <strong>{t.aboutMe.paragraphs[3].strong}</strong> {t.aboutMe.paragraphs[3].text}
-        </p>
+        {t.aboutMe.paragraphs.map((p) => (
+          <p>
+            {p.before}
+            <strong>{p.strong}</strong>
+            {p.after}
+          </p>
+        ))}
     </div>
+
 
 
     <!-- Imagen -->
