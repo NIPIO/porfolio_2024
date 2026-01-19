@@ -1,29 +1,30 @@
 ---
 import ChatMessage from "./ChatMessage.astro"
+
+const { t, lang } = Astro.locals
 ---
 
 <section class="chat-card">
   <header class="chat-header">
-    <h2>Asistente profesional</h2>
-    <p>Elegí una pregunta para continuar</p>
+    <h2>{t.chat.title}</h2>
+    <p>{t.chat.subtitle}</p>
   </header>
 
   <div class="chat-body" id="chat-body">
     <ChatMessage
       role="assistant"
-      content="Hola 👋 Soy Nico. ¿Qué te gustaría saber?"
+      content={t.chat.greeting}
     />
 
     <div class="badges">
-      <button class="badge">¿Cuál es tu experiencia?</button>
-      <button class="badge">¿En qué tecnologías trabajás?</button>
-      <button class="badge">¿Cómo es tu forma de trabajo?</button>
-      <button class="badge">¿Estás disponible para proyectos?</button>
+      {t.chat.initialBadges.map((badge) => (
+        <button class="badge">{badge}</button>
+      ))}
     </div>
   </div>
 </section>
 
-<script>
+<script define:vars={{ currentLang: lang }}>
   const body = document.getElementById("chat-body")
 
   
@@ -43,7 +44,7 @@ import ChatMessage from "./ChatMessage.astro"
     const res = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message })
+      body: JSON.stringify({ message, lang: currentLang })
     })
 
     const data = await res.json()

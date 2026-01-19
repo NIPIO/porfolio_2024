@@ -103,5 +103,16 @@ export default {
     seo: {
       title: "Porfolio de Nico Piovano - Desarrollador Web con +7 años de experiencia",
       description: "Contrata a Nico para crear tu aplicación web o móvil. Desarrollador Web."
+    },
+    chat: {
+      title: "Asistente profesional",
+      subtitle: "Elegí una pregunta para continuar",
+      greeting: "Hola 👋 Soy Nico. ¿Qué te gustaría saber?",
+      initialBadges: [
+        "¿Cuál es tu experiencia?",
+        "¿En qué tecnologías trabajás?",
+        "¿Cómo es tu forma de trabajo?",
+        "¿Estás disponible para proyectos?"
+      ]
     }
   }

@@ -103,5 +103,16 @@ export default {
   seo: {
     title: "Nico Piovano Portfolio - Web Developer with +7 years of experience",
     description: "Hire Nico to create your web or mobile application. Web Developer."
+  },
+  chat: {
+    title: "Professional Assistant",
+    subtitle: "Choose a question to continue",
+    greeting: "Hi 👋 I'm Nico. What would you like to know?",
+    initialBadges: [
+      "What's your experience?",
+      "What technologies do you work with?",
+      "How do you work?",
+      "Are you available for projects?"
+    ]
   }
 }

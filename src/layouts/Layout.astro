@@ -6,6 +6,8 @@ import Footer from "../modules/Footer/Footer.astro"
 import BrowserModal from "../modules/BrowserModal/BrowserModal.astro"
 import {ViewTransitions} from "astro:transitions"
 import ChatWidget from "../modules/Chat/ChatWidget.astro"
+import { getI18n } from "@/i18n"
+import { getLangFromUrl } from "@/utils/lang"
 
 interface Props {
     title: string
@@ -13,6 +15,9 @@ interface Props {
 }
 
 const {description, title} = Astro.props
+const lang = getLangFromUrl(Astro.url)
+Astro.locals.lang = lang
+Astro.locals.t = getI18n(lang)
 ---
 
 <!doctype html>
