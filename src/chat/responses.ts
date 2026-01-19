@@ -21,7 +21,7 @@ export const RESPONSES: Record<string, ChatResponse> = {
 
   experience: {
     text:
-      "Tengo más de 5 años de experiencia desarrollando productos web reales, tanto en equipos como de forma independiente.",
+      "Tengo más de 7 años de experiencia desarrollando productos web reales, tanto en equipos como de forma independiente.",
     followUps: [
       "¿En qué tipo de proyectos trabajaste?",
       "¿Trabajás remoto?",
@@ -58,6 +58,7 @@ export const RESPONSES: Record<string, ChatResponse> = {
     followUps: [
       "¿Trabajás en equipo?",
       "¿Usás metodologías ágiles?",
+      "¿Trabajás como freelance?",
       "¿Cómo es tu proceso de trabajo?",
       "⬅ Volver al inicio"
     ]
@@ -180,6 +181,7 @@ export const RESPONSES: Record<string, ChatResponse> = {
       "Sí, trabajo bien en equipo. Tengo experiencia colaborando con diseñadores, otros desarrolladores y clientes. Valoro la comunicación clara y el feedback constructivo.",
     followUps: [
       "¿Usás metodologías ágiles?",
+      "¿Trabajás como freelance?",
       "¿Cómo es tu proceso de trabajo?",
       "⬅ Volver al inicio"
     ]
@@ -217,7 +219,7 @@ export const RESPONSES: Record<string, ChatResponse> = {
 
   "availability.hours": {
     text:
-      "Trabajo principalmente en horario de oficina (9-18hs), pero tengo flexibilidad según las necesidades del proyecto. Puedo adaptarme a diferentes zonas horarias si es necesario.",
+      "Trabajo principalmente por objetivos. Puedo trabajar en horario de oficina (9-18hs), pero prefiero trabajar con flexibilidad horaria. Puedo adaptarme a diferentes zonas horarias si es necesario.",
     followUps: [
       "¿Full time o part time?",
       "¿Trabajás como freelance?",
