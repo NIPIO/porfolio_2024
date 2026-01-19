@@ -6,44 +6,44 @@ function initProjectsScroll() {
   if (cards.length === 0) return
   
   // Si no es Firefox, desactivar todos los efectos y mostrar cards estáticas
-  if (!isFirefox) {
-    const section = document.querySelector('section.relative')
-    if (section) {
-      section.style.height = 'auto'
-      section.style.minHeight = 'auto'
-      section.style.marginTop = '0' // Quitar margin negativo para que el título sea visible
-    }
+  // if (!isFirefox) {
+  //   const section = document.querySelector('section.relative')
+  //   if (section) {
+  //     section.style.height = 'auto'
+  //     section.style.minHeight = 'auto'
+  //     section.style.marginTop = '0' // Quitar margin negativo para que el título sea visible
+  //   }
     
-    cards.forEach((card, i) => {
-      card.style.position = 'relative'
-      card.style.top = 'auto'
-      card.style.left = 'auto'
-      card.style.width = '100%'
-      card.style.height = 'auto'
-      card.style.transform = 'none'
-      card.style.marginBottom = '2rem'
-      card.style.opacity = '1'
-      card.style.zIndex = 'auto'
-    })
+  //   cards.forEach((card, i) => {
+  //     card.style.position = 'relative'
+  //     card.style.top = 'auto'
+  //     card.style.left = 'auto'
+  //     card.style.width = '100%'
+  //     card.style.height = 'auto'
+  //     card.style.transform = 'none'
+  //     card.style.marginBottom = '2rem'
+  //     card.style.opacity = '1'
+  //     card.style.zIndex = 'auto'
+  //   })
     
-    // Cambiar el contenedor sticky a normal
-    const stickyContainer = document.querySelector('.sticky')
-    if (stickyContainer) {
-      stickyContainer.style.position = 'relative'
-      stickyContainer.style.height = 'auto'
-      stickyContainer.style.overflow = 'visible'
-    }
+  //   // Cambiar el contenedor sticky a normal
+  //   const stickyContainer = document.querySelector('.sticky')
+  //   if (stickyContainer) {
+  //     stickyContainer.style.position = 'relative'
+  //     stickyContainer.style.height = 'auto'
+  //     stickyContainer.style.overflow = 'visible'
+  //   }
     
-    const innerContainer = document.querySelector('.sticky > div')
-    if (innerContainer) {
-      innerContainer.style.display = 'flex'
-      innerContainer.style.flexDirection = 'column'
-      innerContainer.style.gap = '2rem'
-      innerContainer.style.alignItems = 'stretch'
-    }
+  //   const innerContainer = document.querySelector('.sticky > div')
+  //   if (innerContainer) {
+  //     innerContainer.style.display = 'flex'
+  //     innerContainer.style.flexDirection = 'column'
+  //     innerContainer.style.gap = '2rem'
+  //     innerContainer.style.alignItems = 'stretch'
+  //   }
     
-    return
-  }
+  //   return
+  // }
   
   // Comportamiento con efectos solo para Firefox
   const vh = window.innerHeight

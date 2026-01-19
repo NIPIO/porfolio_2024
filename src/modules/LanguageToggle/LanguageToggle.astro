@@ -1,0 +1,53 @@
+---
+import "./LanguageToggle.astro.css"
+
+const LANGUAGES = [
+  { code: "es", name: "Español", flag: "🇦🇷" },
+  { code: "en", name: "English", flag: "🇺🇸" },
+  { code: "pt", name: "Portugués", flag: "🇧🇷" },
+  // { code: "it", name: "Italiano", flag: "🇮🇹" },
+  // { code: "fr", name: "Français", flag: "🇫🇷" },
+  // { code: "de", name: "Deutsch", flag: "🇩🇪" }
+]
+
+// Obtener idioma actual desde la URL
+const supportedLangs = ['es', 'en', 'pt']
+let currentLang = 'es' // Default
+for (const lang of supportedLangs) {
+  if (Astro.url.pathname.startsWith(`/${lang}`)) {
+    currentLang = lang
+    break
+  }
+}
+const currentLanguage = LANGUAGES.find(lang => lang.code === currentLang) || LANGUAGES[0]
+---
+
+<div class="relative ml-1 mr-1">
+  <button
+    id="language-toggle-btn"
+    class="appearance-none border-none flex hover:scale-125 transition"
+    aria-label="Elige el idioma"
+  >
+    <span class="sr-only">Elige el idioma</span>
+    <span id="current-language-flag" class="text-xl">{currentLanguage.flag}</span>
+  </button>
+  <div
+    id="languages-menu"
+    class="absolute hidden scale-80 top-8 right-0 text-sm p-1 min-w-[8rem] rounded-md border border-gray-100 bg-white/90 dark:bg-gray-900/90 dark:border-gray-500/20 shadow-[0_3px_10px_rgb(0,0,0,0.2)] backdrop-blur-md z-50"
+  >
+    <ul>
+      {
+        LANGUAGES.map((lang) => (
+          <li 
+            class="language-menu-option px-2 py-1.5 cursor-default hover:bg-neutral-400/40 dark:hover:bg-gray-500/50 rounded-sm flex items-center gap-2"
+            data-lang={lang.code}
+          >
+            <span class="text-lg">{lang.flag}</span>
+            <span>{lang.name}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+<script src="./LanguageToggle.astro.js"></script>

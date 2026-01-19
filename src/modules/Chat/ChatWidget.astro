@@ -1,0 +1,24 @@
+---
+import ChatUi from "./ChatUi.astro"
+import "./chat.css"
+---
+
+<div id="chat-widget">
+  <button id="chat-toggle" aria-label="Abrir chat">
+    💬
+  </button>
+
+  <div id="chat-panel" class="hidden">
+    <ChatUi />
+  </div>
+</div>
+
+<script>
+  const toggle = document.getElementById("chat-toggle")
+  const panel = document.getElementById("chat-panel")
+
+  toggle.addEventListener("click", () => {
+    panel.classList.toggle("hidden")
+    panel.classList.toggle("open")
+  })
+</script>

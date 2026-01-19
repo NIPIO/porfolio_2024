@@ -1,0 +1,70 @@
+---
+import ChatMessage from "./ChatMessage.astro"
+
+const { t, lang } = Astro.locals
+---
+
+<section class="chat-card">
+  <header class="chat-header">
+    <h2>{t.chat.title}</h2>
+    <p>{t.chat.subtitle}</p>
+  </header>
+
+  <div class="chat-body" id="chat-body">
+    <ChatMessage
+      role="assistant"
+      content={t.chat.greeting}
+    />
+
+    <div class="badges">
+      {t.chat.initialBadges.map((badge) => (
+        <button class="badge">{badge}</button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ currentLang: lang }}>
+  const body = document.getElementById("chat-body")
+
+  
+  body.addEventListener("click", async (e) => {
+    if (!e.target.classList.contains("badge")) return
+
+    // 🔥 limpiar badges anteriores
+    body.querySelectorAll(".badges").forEach(el => el.remove())
+
+    const message = e.target.textContent
+
+    body.insertAdjacentHTML(
+      "beforeend",
+      `<div class="msg user">${message}</div>`
+    )
+
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message, lang: currentLang })
+    })
+
+    const data = await res.json()
+
+    body.insertAdjacentHTML(
+      "beforeend",
+      `<div class="msg assistant">${data.reply}</div>`
+    )
+
+    if (data.followUps?.length) {
+      const badges = data.followUps
+        .map(q => `<button class="badge">${q}</button>`)
+        .join("")
+
+      body.insertAdjacentHTML(
+        "beforeend",
+        `<div class="badges">${badges}</div>`
+      )
+    }
+
+    body.scrollTop = body.scrollHeight
+  })
+</script>
