@@ -1,6 +1,4 @@
-import type { Lang } from "@/i18n"
-
-export function matchIntent(message: string, lang: Lang = "es"): string {
+export function matchIntent(message: string): string {
   const text = message.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 
   // Volver al inicio siempre tiene prioridad (multiidioma)
@@ -132,21 +130,21 @@ export function matchIntent(message: string, lang: Lang = "es"): string {
     text.includes("experiencia") || text.includes("experience") || text.includes("experiencia") ||
     text.includes("años") || text.includes("years") || text.includes("anos")
   ) return "experience"
-  
+
   if (
     text.includes("tecnolog") || text.includes("stack") || text.includes("vue") || text.includes("react") ||
     text.includes("frontend") || text.includes("backend")
   ) return "stack"
-  
+
   if (
     text.includes("proyecto") || text.includes("project") || text.includes("projeto")
   ) return "projects"
-  
+
   if (
     text.includes("trabajo") || text.includes("work") || text.includes("trabalho") ||
     text.includes("equipo") || text.includes("team") || text.includes("equipe")
   ) return "way_of_working"
-  
+
   if (
     text.includes("dispon") || text.includes("available") || text.includes("disponivel") ||
     text.includes("freelance")
