@@ -1,29 +1,36 @@
 ---
-import ThemeToggle from "@/modules/ThemeToggle/ThemeToggle.astro"
-import LanguageToggle from "@/modules/LanguageToggle/LanguageToggle.astro"
+import ThemeToggle from "@/modules/ThemeToggle/ThemeToggle.astro";
+import LanguageToggle from "@/modules/LanguageToggle/LanguageToggle.astro";
 
-const { t } = Astro.locals
-const navItems = t.header
+const navItems = Astro.locals?.t?.header ?? [];
 ---
+
 <header class="fixed top-0 z-20 w-full flex justify-center mt-2">
     <!-- Desktop -->
     <nav
-            class="hidden md:flex items-center px-3 text-sm font-medium rounded-full
+        class="hidden md:flex items-center px-3 text-sm font-medium rounded-full
            bg-gray-300 dark:bg-gray-600
            text-gray-600 dark:text-gray-200"
     >
         {
-            navItems.map(link => (
-                <a
-                href={link.url}
-                data-section={link.section}
-                {...(link.download ? { download: '' } : {})}
-                class="nav-link relative px-2 py-2 transition
+            navItems.map(
+                (link: {
+                    url: string | URL | null | undefined;
+                    section: any;
+                    download: any;
+                    title: unknown;
+                }) => (
+                    <a
+                        href={link.url}
+                        data-section={link.section}
+                        {...(link.download ? { download: "" } : {})}
+                        class="nav-link relative px-2 py-2 transition
                         hover:text-green-600 dark:hover:text-custom-green"
-                >
-                {link.title}
-                </a>
-            ))
+                    >
+                        {link.title}
+                    </a>
+                ),
+            )
         }
         <LanguageToggle />
         <ThemeToggle />
@@ -32,33 +39,39 @@ const navItems = t.header
     <!-- Mobile -->
     <div class="md:hidden relative">
         <button
-                id="menu-btn"
-                aria-label="Abrir menú"
-                aria-expanded="false"
-                class="flex items-center justify-center w-10 h-10 rounded-full
+            id="menu-btn"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+            class="flex items-center justify-center w-10 h-10 rounded-full
              bg-white/70 dark:bg-gray-900/80 backdrop-blur shadow"
         >
             ☰
         </button>
 
         <div
-                id="menu"
-                class="hidden absolute right-0 mt-3 w-48 rounded-xl
+            id="menu"
+            class="hidden absolute right-0 mt-3 w-48 rounded-xl
              bg-white/90 dark:bg-gray-900/90 backdrop-blur
              shadow-lg ring-1 ring-black/5"
         >
             <nav class="flex flex-col p-2 text-sm">
                 {
-                    navItems.map(link => (
+                    navItems.map(
+                        (link: {
+                            url: string | URL | null | undefined;
+                            section: any;
+                            title: unknown;
+                        }) => (
                             <a
-                                    href={link.url}
-                                    data-section={link.section}
-                                    class="nav-link px-3 py-2 rounded-lg transition
+                                href={link.url}
+                                data-section={link.section}
+                                class="nav-link px-3 py-2 rounded-lg transition
                      hover:bg-green-500/10 dark:hover:bg-green-500/10"
                             >
                                 {link.title}
                             </a>
-                    ))
+                        ),
+                    )
                 }
                 <div class="px-3 py-2">
                     <ThemeToggle />
