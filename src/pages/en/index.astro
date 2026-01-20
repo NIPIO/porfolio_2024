@@ -62,9 +62,9 @@ const { t } = Astro.locals;
 <script>
     function initAnchorScroll() {
         document.querySelectorAll('a[href^="#"]').forEach((link) => {
-            link.onclick = (e) => {
-                const id = link.getAttribute("href").slice(1);
-                const target = document.getElementById(id);
+            (link as HTMLElement).onclick = (e: Event) => {
+                const id = link.getAttribute("href")?.slice(1);
+                const target = document.getElementById(id ?? "");
                 if (!target) return;
 
                 e.preventDefault();
