@@ -4,7 +4,7 @@ import ChatMessage from "./ChatMessage.astro"
 const { t, lang } = Astro.locals
 ---
 
-<section class="chat-card">
+<section class="chat-card" data-lang={lang}>
   <header class="chat-header">
     <h2>{t.chat.title}</h2>
     <p>{t.chat.subtitle}</p>
@@ -17,24 +17,29 @@ const { t, lang } = Astro.locals
     />
 
     <div class="badges">
-      {t.chat.initialBadges.map((badge) => (
+      {t.chat.initialBadges.map((badge: string) => (
         <button class="badge">{badge}</button>
       ))}
     </div>
   </div>
 </section>
 
-<script define:vars={{ currentLang: lang }}>
+<script>
   const body = document.getElementById("chat-body")
-
+  if (!body) return
   
-  body.addEventListener("click", async (e) => {
-    if (!e.target.classList.contains("badge")) return
+  const chatCard = document.querySelector(".chat-card")
+  const currentLang = chatCard?.getAttribute("data-lang") || "es"
+  
+  body.addEventListener("click", async (e: Event) => {
+    const target = e.target as HTMLElement
+    if (!target || !target.classList.contains("badge")) return
 
     // 🔥 limpiar badges anteriores
     body.querySelectorAll(".badges").forEach(el => el.remove())
 
-    const message = e.target.textContent
+    const message = target.textContent
+    if (!message) return
 
     body.insertAdjacentHTML(
       "beforeend",
@@ -55,8 +60,8 @@ const { t, lang } = Astro.locals
     )
 
     if (data.followUps?.length) {
-      const badges = data.followUps
-        .map(q => `<button class="badge">${q}</button>`)
+      const badges = (data.followUps as string[])
+        .map((q: string) => `<button class="badge">${q}</button>`)
         .join("")
 
       body.insertAdjacentHTML(

@@ -34,7 +34,7 @@ const EXPERIENCE = t.experience.items.map(item => ({
         <div class="timeline" id="timeline">
             <div class="timeline-line"></div>
 
-            {EXPERIENCE.map((exp) => (
+            {EXPERIENCE.map((exp: typeof EXPERIENCE[0]) => (
                     <article class="timeline-item">
                         <!--<span class="dot" class:list={{ actual: exp.actual }}></span>-->
                         <ExperienceItem experience={exp} techUrls={TECH_URLS} learningLabel={t.experience.learning}/>
